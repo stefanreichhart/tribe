@@ -1,0 +1,248 @@
+{
+	"items": [ 
+		{
+			"id": 0,
+			"poster": "/data/0.jpeg",
+			"firstname": "Justo",
+			"lastname": "Tristique",
+			"addresses": [
+				{
+						"type": "private", 
+						"street": "Bibendum Risus",
+						"zip": "3014",
+						"city": "Lorem",
+						"country": "SchWEIZ",
+						"map": false
+				},
+				{
+						"type": "private", 
+						"street": "Porta Tellus Malesuada",
+						"zip": "3014",
+						"city": "Lorem",
+						"country": "Schweiz",
+						"map": false
+				}
+			],
+			"phonenumbers": [
+				{
+					"type": "private",  
+					"phone": "012 345 67 89"
+				},
+				{
+					"type": "work",  
+					"phone": "012 345 67 89"
+				}
+			],
+			"emails": [
+				{
+					"type": "private",  
+					"number": "Justo.Tristique@gmail.com"
+				},
+				{
+					"type": "work",  
+					"email": "Justo.Tristique@gmail.com"
+				}
+			],
+			"groups": [
+				1, 2, 3
+			]
+		}, 
+		{
+			"id": 1,
+			"poster": "/data/1.jpeg",
+			"firstname": "Amet",
+			"lastname": "Vulputate",
+			"addresses": [
+				{
+						"type": "private", 
+						"street": "Cursus Elit Vestibulum",
+						"zip": "1234",
+						"city": "Solothurn",
+						"country": "Schweden"
+				}
+			],
+			"phonenumbers": [
+				{
+					"type": "private",  
+					"phone": "098 765 43 21"
+				},
+				{
+					"type": "work",  
+					"phone": "123 456 78 90"
+				}
+			],
+			"emails": [
+				{
+					"type": "private",  
+					"number": "Amet.Vulputate@hotmail.com"
+				}
+			],
+			"groups": [
+				1
+			]
+		},
+		{
+			"id": 2,
+			"poster": "/data/2.jpeg",
+			"firstname": "Condimentum",
+			"lastname": "Elit",
+			"addresses": [
+				{
+						"type": "private", 
+						"street": "Dolor Ligula Mattis",
+						"zip": "6789",
+						"city": "Malesuada",
+						"country": "Schwaziland"
+				}
+			],
+			"phonenumbers": [
+				{
+					"type": "private",  
+					"phone": "456 789 45 45"
+				},
+				{
+					"type": "work",  
+					"phone": "876 23 56 78"
+				}
+			],
+			"emails": [
+				{
+					"type": "private",  
+					"number": "Condimentum.Elit@bluewin.com"
+				},
+				{
+					"type": "work",  
+					"email": "Condimentum.Elit@bluewin.com"
+				}
+			],
+			"groups": [
+				2, 3
+			]
+		}, 
+		{
+			"id": 3,
+			"poster": "/data/3.jpeg",
+			"firstname": "Sollicitudin",
+			"lastname": "Amet",
+			"addresses": [
+				{
+						"type": "private", 
+						"street": "Nullam",
+						"zip": "7777",
+						"city": "Zürich",
+						"country": "Schwerin"
+				}
+			],
+			"phonenumbers": [
+				{
+					"type": "private",  
+					"phone": "777 888 99 54"
+				},
+				{
+					"type": "work",  
+					"phone": "567 345 12 34"
+				}
+			],
+			"emails": [
+				{
+					"type": "private",  
+					"number": "Justo.Amet@gmail.com"
+				},
+				{
+					"type": "work",  
+					"email": "s.a@gmail.com"
+				}
+			],
+			"groups": [
+				3
+			]
+		}, 
+		{
+			"id": 4,
+			"poster": "/data/4.jpeg",
+			"firstname": "Justo",
+			"lastname": "ReichharD",
+			"addresses": [
+				{
+						"type": "private", 
+						"street": "Bibendum Risus",
+						"zip": "3014",
+						"city": "Zug",
+						"country": "Schwups"
+				}
+			],
+			"phonenumbers": [
+				{
+					"type": "private",  
+					"phone": "012 345 67 89"
+				},
+				{
+					"type": "work",  
+					"phone": "012 345 67 89"
+				}
+			],
+			"emails": [
+				{
+					"type": "private",  
+					"number": "Justo.Tristique@gmail.com"
+				},
+				{
+					"type": "work",  
+					"email": "Justo.Tristique@gmail.com"
+				}
+			],
+			"groups": [
+				1, 2, 3
+			]
+		}, 
+		{
+			"id": 5,
+			"poster": "/data/5.jpeg",
+			"firstname": "Malesuada Mollis Risus",
+			"lastname": "Sem",
+			"addresses": [
+				{
+						"type": "private", 
+						"street": "Ligula Dolor Ridiculus Nibh",
+						"zip": "5555",
+						"city": "Etiam Sollicitudin",
+						"country": "Schweiz"
+				}
+			],
+			"phonenumbers": [
+			],
+			"emails": [
+			],
+			"groups": [
+				1, 2
+			]
+		}
+
+	],
+	"groups": [
+			{
+				"id": 1,
+				"name": "Admin"
+			},
+			{
+				"id": 2,
+				"name": "Devel"
+			},
+			{
+				"id": 3,
+				"name": "Sys"
+			},
+			{
+				"id": 4,
+				"name": "Sys2"
+			},
+			{
+				"id": 5,
+				"name": "Sys3"
+			},
+			{
+				"id": 6,
+				"name": "Sys4"
+			}
+	]
+}
