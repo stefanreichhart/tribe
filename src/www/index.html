@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tribeApplication" ng-controller="tribeController">
+  <head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="author" content="Stefan Reichhart">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- devices/browsers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- stylesheets -->
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/angular-material/angular-material.min.css" rel="stylesheet">
+    <link href="css/tribe.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- view -->
+    <h1>Tribe</h1>
+    <div class="tribeView" ng-view></div>
+    <!-- external libraries -->
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/moment/min/moment.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-route/angular-route.min.js"></script>
+    <script src="lib/angular-animate/angular-animate.min.js"></script>
+    <script src="lib/angular-aria/angular-aria.min.js"></script>
+    <script src="lib/angular-messages/angular-messages.min.js"></script>
+    <script src="lib/angular-material/angular-material.min.js"></script>
+    <!-- app utils -->
+    <script src="js/tribe.js"></script>
+    <!-- app core -->
+    <script src="app.js"></script>
+    <script src="controllers/items.js"></script>
+    <script src="controllers/view.js"></script>
+    <script src="controllers/item.js"></script>
+    <script src="controllers/edit.js"></script>
+    <script src="controllers/add.js"></script>
+    <script src="controllers/type.js"></script>
+  </body>
+</html>
+

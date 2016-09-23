@@ -1,0 +1,126 @@
+# databases
+*.sqlite
+
+
+# eclipse
+*.project
+*.settings
+
+# emacs
+*~
+\#*
+.\#*
+
+# javascript
+*.json
+**/node_modules
+*.app
+
+# latex
+/texput.log
+*.synctex.gz
+*.toc
+*.idx
+
+# osx
+*DS_Store
+*.DS_Store
+.DS_Strore?
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# packaging
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# pier
+*.pier.pdf
+*.pier.md
+*.pier.tex
+*.pier.html
+
+# pillar
+/pillar
+*.pillar.pdf
+*.pillar.md
+*.pillar.tex
+*.pillar.html
+/book-result
+
+# repositories
+*/.svn/*
+**/.svn/*
+
+# smalltalk 
+/crash.dmp
+/Pharo.changes
+/Pharo.image
+/pharo-vm
+/pharo-ui
+/vm.sh
+/vm-ui.sh
+/pharo
+/package-cache
+
+# sublime
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+
+# temporary
+*.aux
+*.glo
+*.out
+*.o
+*.so
+*.class
+*.pyc
+*.com
+*.dll
+*.exe
+*.tmp
+*.log
+auto/
+files/
+
+# textmate
+*.tmproj
+*.tmproject
+tmtags
+
+# vi/vim
+*.swp
+
+# windows
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+ehthumbs.db
+Icon?
+Thumbs.db
+

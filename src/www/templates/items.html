@@ -1,0 +1,38 @@
+<form name="filter">
+	<label for="searchText">Suchen</label>
+	<input name="searchText" type="text" ng-model="searchText" />
+	<a href="" ng-click="resetSearch()">x</a>
+</form>
+
+<ul>
+	<li>
+		<span href="" class="link active" ng-show="!selectedGroup">ALL</span>
+		<a ng-href="#{{viewItemsUrl()}}" ng-show="!!selectedGroup">ALL</a>
+	</li>
+	<li ng-repeat="group in groups | orderBy: 'name'">
+		<span href="" class="link active" ng-show="group == selectedGroup">{{group.name}}</span>
+		<a class="link" href="#{{groupUrl(group.id)}}" ng-show="group != selectedGroup">{{group.name}}</a>
+	</li>
+</ul>
+
+<div class="container-fluid">
+	<ng-pluralize count="filteredGroupItems.length" when="{ 0: 'No items available for display', 1: '1 item displayed from group {{selectedGroup.name}}', 'other': '{{filteredGroupItems.length}} / {{selectedGroupItems.length}} items displayed from group {{selectedGroup.name}}' }"></ng-pluralize>
+	<ul ng-show="filteredGroupItems.length" class="items row">
+		<li ng-repeat="item in filteredGroupItems = (selectedGroupItems | tokens:searchText)" class="item col-md-2 col-sm-3 col-xs-6">
+			<a href="#{{viewItemUrl(item)}}">
+				<div class="container-ratio">
+					<div class="content-ratio">
+						<img class="item-poster" ng-src="{{item.poster}}">
+					</div>
+				</div>
+				<h2>
+					<span class="item-firstname">{{item.firstname}}</span>
+					<span class="item-lastname">{{item.lastname}}</span>
+				</h2>
+			</a>
+		</li>
+		<li>
+			<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member">+</a>
+		</li>
+	</ul>
+</div>
