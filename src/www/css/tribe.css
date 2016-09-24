@@ -1,13 +1,183 @@
-.items {
-	list-style-type: none;
+/* primitives */
+
+.row-fluid {
+	float: left;
+	width: 100%;
+	display: block;
+	box-sizing: border-box;
 }
+
+.controls {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-top: 20px;
+	border-top: 1px solid gray;
+}
+
+/* items */
+
+h1 {
+	padding-left: 35px;
+}
+
+.nav-mobile-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 20px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	padding: 0px 15px 0px 15px;
+}
+
+.nav-mobile-menu label {
+	padding: 9px 0px 0px 0px;
+	margin: 0;
+}
+
+#nav-mobile-toggle {
+	display: none;
+}
+
+@media (min-width: 640px) {
+	.items-nav {
+		width: 20%;
+	}
+
+	.items-list {
+		width: 80%;
+	}
+	.items-nav.ng-hide {
+		display: block !important;
+	}
+	.nav-mobile-menu,
+	.nav-mobile-scroll {
+		display: none;
+	}
+	h1 {
+		padding-left: 0px;
+	}
+	.float-right {
+		float: right;
+	}
+}
+
+
+.input-deletable {
+	width: 80%;
+}
+
+.nav-link,
+.nav-link:active,
+.nav-link:hover {
+	text-decoration: none;
+}
+
+.nav-delete {
+	width: 10%;
+	padding: 2%;
+}
+
+.nav-mobile-scroll {
+	width: 40px;
+	height: 40px;
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+	background-color: lightgray;
+	border-radius: 20px;
+}
+
+.nav-mobile-scroll > a {
+	color: white;
+	padding: 8px 10px 12px 10px;
+    font-size: 20px;
+}
+
+.items-list h2 {
+	font-size: 14px;
+}
+
+.items-list .item {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.items-list .item:hover {
+	box-shadow: 0 0 2px 0px lightgray;
+}
+.items {
+	float: left;
+    width: 100%;
+}
+
+.item-actions {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	background-color: white;
+	border-radius: 4px;
+	border: 1px solid lightgray;
+}
+.item:hover .item-actions {
+	display: block;
+}
+
+.item-action {
+	opacity: 0.5;
+	padding: 6px;
+	margin: 4px;
+	border: 1px solid transparent;
+	color: red;
+}
+
+.item:hover .item-action:hover {
+	opacity: 1;
+	color: red;
+	text-decoration: none;
+	border: 1px solid red;
+	border-radius: 4px;
+}
+
+/* view */
 
 .item-poster {
 	max-width: 100%;
 	max-height: 100%;
-	margin: auto;
 	display: block;
 }
+
+.item-entries {
+	list-style: none;
+	float: left;
+	width: 100%;
+	display: block;
+	padding: 0px;
+}
+
+.item-entry {
+	float: left;
+	width: 100%;
+	display: block;
+}
+
+.item-key {
+	float: left;
+	display: block;
+	color: gray;
+	width: 80px;
+	margin-right: 20px;
+	text-align: right;
+}
+.item-value {
+	float: left;
+	display: block;
+	width: auto;
+}
+
+/* TODO */
 
 .container-ratio {
 	position: relative;
@@ -28,9 +198,7 @@
 	height: 100px;
 }
 
-textarea {
-	resize: none;
-}
+
 
 form .ng-invalid {
 	border: 2px solid red !important;

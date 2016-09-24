@@ -1,19 +1,22 @@
-<img class="item-poster" ng-src="{{item.poster}}">
 
-<h2>
-	<span class="item-firstname">{{item.firstname}}</span>
-	<span class="item-lastname">{{item.lastname}}</span>
+<div class="row-fluid">
+	<img class="item-poster" ng-src="{{item.poster}}">
+</div>
+
+<h2 class="row-fluid" >
+	<span>{{item.firstname}}</span>
+	<span>{{item.lastname}}</span>
 </h2>
 
-<div ng-hide="!item.addresses || !item.addresses.length">
+<div class="row-fluid" ng-hide="!item.addresses || !item.addresses.length">
 	<h3>Addresses</h3>
-	<ul>
-		<li ng-repeat="address in item.addresses">
-			<span>{{address.type}}</span>
-			<address>
-				<span ng-hide="!address.street"> {{address.street}}</span>
+	<ul class="item-entries">
+		<li class="item-entry" ng-repeat="address in item.addresses">
+			<span class="item-key">{{address.type}}</span>
+			<address class="item-value">
+				<span ng-hide="!address.street"> {{address.street}}</span><br />
 				<span ng-hide="!address.zip"> {{address.zip}}</span>
-				<span ng-hide="!address.city"> {{address.city}}</span>
+				<span ng-hide="!address.city"> {{address.city}}</span><br />
 				<span ng-hide="!address.country"> {{address.country}}</span>
 			</address>
 			<div class="google-map" data-address="{{address}}" ng-show="address.map === true"></div>
@@ -21,32 +24,32 @@
 	</ul>
 </div>
 
-<div ng-hide="!item.phonenumbers || !item.phonenumbers.length">
+<div class="row-fluid" ng-hide="!item.phonenumbers || !item.phonenumbers.length">
 	<h3>Phone Numbers</h3>
-	<ul>
-		<li ng-repeat="phonenumber in item.phonenumbers" ng-hide="!phonenumber.phone">
-			<span>{{phonenumber.type}}</span>
-			<a href="tel:{{phonenumber.phone}}"> {{phonenumber.phone}}</a>
+	<ul class="item-entries">
+		<li class="item-entry" ng-repeat="phonenumber in item.phonenumbers" ng-hide="!phonenumber.phone">
+			<span class="item-key">{{phonenumber.type}}</span>
+			<a class="item-value" href="tel:{{phonenumber.phone}}"> {{phonenumber.phone}}</a>
 		</li>
 	</ul>
 </div>
 
-<div ng-hide="!item.emails  || !item.phonenumbers.emails">
+<div class="row-fluid" ng-hide="!item.emails  || !item.phonenumbers.emails">
 	<h3>E-mail</h3>
-	<ul>
-		<li ng-repeat="email in item.emails" ng-hide="!email">
-			<span>{{email.type}}</span>
-			<a href="mailto:{{email.email}}" >{{email.email}}</a>
+	<ul class="item-entries">
+		<li class="item-entry" ng-repeat="email in item.emails" ng-hide="!email">
+			<span class="item-key">{{email.type}}</span>
+			<a class="item-value" href="mailto:{{email.email}}" >{{email.email}}</a>
 		</li>
 	</ul>
 </div>
 
-<div ng-hide="!item.description">
+<div class="row-fluid" ng-hide="!item.description">
 	<h3>Description</h3>
 	<p>{{item.description}}</p>
 </div>
 
-<div ng-hide="!item.groups || !item.groups.length">
+<div class="row-fluid" ng-hide="!item.groups || !item.groups.length">
 	<h3>Groups</h3>
 	<ul>
 		<li ng-repeat="group in getGroups(item)">
@@ -55,7 +58,8 @@
 	</ul>
 </div>
 
-<div>
+<div class="row-fluid controls" >
 	<a href="" ng-click="goBack()" class="btn btn-default">Back</a>
-	<a href="#{{editItemUrl(item)}}" class="btn btn-default btn-primary">Edit</a>
+	<a href="#{{editItemUrl(item)}}" class="btn btn-primary">Edit member</a>
+	<a class="btn btn-danger float-right" ng-click="removeItemConfirmed(item, $event)" >Remove member</a>
 </div>

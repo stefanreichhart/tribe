@@ -1,4 +1,4 @@
-var application = angular.module("tribeApplication", [ "ngRoute", "ngMaterial", "ngMessages" ]);
+var application = angular.module("tribeApplication", [ "ngRoute", "ngMaterial", "ngMessages", "ngSanitize" ]);
 
 application.constant("types", [ 'work', 'home' ]);
 
@@ -35,6 +35,10 @@ application.config(function($routeProvider) {
 		});
 });
 
+application.config(function($mdThemingProvider) {
+	$mdThemingProvider.disableTheming();
+});
+
 application.config(function($mdDateLocaleProvider) {
 	$mdDateLocaleProvider.formatDate = function(date) {
       var m = moment(date);
@@ -63,14 +67,6 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 			$log.debug($scope, error);
 			$scope.error = error;
 		});
-	/*
-	$scope.removeItem = function(item) {
-		$scope.database.items.splice($scope.database.items.indexOf(item),1);
-	};
-	$scope.addItem = function(item) {
-		$scope.database.items.push(item);
-	};
-	*/
 	$scope.goBack = function() {
 		$window.history.back();
 	};
@@ -85,6 +81,9 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 	};
 	$scope.editItemUrl = function(item) {
 		return "/edit/" + item.id;
+	};
+	$scope.removeItemUrl = function(item) {
+		return "/remove/" + item.id;
 	};
 	$scope.viewItemUrl = function(item) {
 		return "/view/" + item.id;

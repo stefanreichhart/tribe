@@ -1,6 +1,6 @@
 var application = angular.module("tribeApplication");
 
-application.controller("ItemController", function($scope, $routeParams, $location, $mdDateLocale, $log) {
+application.controller("ItemController", function($scope, $routeParams, $location, $mdDateLocale, $mdDialog, $log) {
 	$scope.today = function() {
 		return $mdDateLocale.formatDate(new Date());
 	};
@@ -58,5 +58,21 @@ application.controller("ItemController", function($scope, $routeParams, $locatio
 			$scope.addableGroups = null;
 			$scope.searchText = null;
 		}
+	};
+	$scope.cancelItemConfirmed = function(event) {
+		// Appending dialog to document.body to cover sidenav in docs app
+		var confirm = $mdDialog.confirm()
+			.title("Discard changes?")
+			.htmlContent("Are you sure you want to discard all changes made to the member " + $scope.item.firstname + " " + $scope.item.lastname + "? <br />This action cannot be undone.")
+			.targetEvent(event)
+			.ok("Discard changes")
+			.cancel("Cancel");
+
+		$mdDialog.show(confirm)
+			.then(function() {
+				$scope.goBack();
+			}, function() {
+				// do nothing
+			});
 	};
 });

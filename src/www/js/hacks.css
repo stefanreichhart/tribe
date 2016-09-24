@@ -1,0 +1,135 @@
+/* overrides bootstrap */
+
+html, 
+body {
+	background-color: white;
+}
+
+textarea {
+	resize: none;
+}
+
+ul {
+	padding-left: 20px;
+}
+
+.btn {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+
+/* overrides angular-material */
+
+.md-confirm-button:focus,
+.md-confirm-button.focus {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #761c19;
+}
+.md-confirm-button:hover {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+.md-confirm-button:active,
+.md-confirm-button.active,
+.open > .dropdown-toggle.md-confirm-button {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+.md-confirm-button:active:hover,
+.md-confirm-button.active:hover,
+.open > .dropdown-toggle.md-confirm-button:hover,
+.md-confirm-button:active:focus,
+.md-confirm-button.active:focus,
+.open > .dropdown-toggle.md-confirm-button:focus,
+.md-confirm-button:active.focus,
+.md-confirm-button.active.focus,
+.open > .dropdown-toggle.md-confirm-button.focus {
+  color: #fff;
+  background-color: #ac2925;
+  border-color: #761c19;
+}
+.md-confirm-button:active,
+.md-confirm-button.active,
+.open > .dropdown-toggle.md-confirm-button {
+  background-image: none;
+}
+.md-confirm-button.disabled:hover,
+.md-confirm-button[disabled]:hover,
+fieldset[disabled] .md-confirm-button:hover,
+.md-confirm-button.disabled:focus,
+.md-confirm-button[disabled]:focus,
+fieldset[disabled] .md-confirm-button:focus,
+.md-confirm-button.disabled.focus,
+.md-confirm-button[disabled].focus,
+fieldset[disabled] .md-confirm-button.focus {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.md-confirm-button .badge {
+  color: #d9534f;
+  background-color: #fff;
+}
+
+/* overrides angular-material */
+
+.md-cancel-button {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.md-cancel-button:focus,
+.md-cancel-button.focus {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #8c8c8c;
+}
+.md-cancel-button:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.md-cancel-button:active,
+.md-cancel-button.active,
+.open > .dropdown-toggle.md-cancel-button {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.md-cancel-button:active:hover,
+.md-cancel-button.active:hover,
+.open > .dropdown-toggle.md-cancel-button:hover,
+.md-cancel-button:active:focus,
+.md-cancel-button.active:focus,
+.open > .dropdown-toggle.md-cancel-button:focus,
+.md-cancel-button:active.focus,
+.md-cancel-button.active.focus,
+.open > .dropdown-toggle.md-cancel-button.focus {
+  color: #333;
+  background-color: #d4d4d4;
+  border-color: #8c8c8c;
+}
+.md-cancel-button:active,
+.md-cancel-button.active,
+.open > .dropdown-toggle.md-cancel-button {
+  background-image: none;
+}
+.md-cancel-button.disabled:hover,
+.md-cancel-button[disabled]:hover,
+fieldset[disabled] .md-cancel-button:hover,
+.md-cancel-button.disabled:focus,
+.md-cancel-button[disabled]:focus,
+fieldset[disabled] .md-cancel-button:focus,
+.md-cancel-button.disabled.focus,
+.md-cancel-button[disabled].focus,
+fieldset[disabled] .md-cancel-button.focus {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.md-cancel-button .badge {
+  color: #fff;
+  background-color: #333;
+}

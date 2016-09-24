@@ -1,42 +1,56 @@
 <form name="form" ng-controller="ItemController" ng-submit="form.$valid && submit()" ng-cloak>
 	<img class="item-poster" ng-src="{{item.poster}}">
 
-	<h2>
+	<h2 class="row-fluid" >
 		<label for="item.firstname" class="item-firstname">Firstname</label>
 		<input name="item.firstname" type="text" ng-model="item.firstname" required />
 		<label for="item.lastname" class="item-lastname">Lastname</label>
 		<input name="item.lastname" type="text" ng-model="item.lastname" required />
 	</h2>
 
-	<div>
+	<div class="row-fluid" >
 		<h3>Addresses</h3>
 		<ul>
 			<li ng-repeat="each in item.addresses" ng-controller="KeyValueAutocompleterController">
 				<ng-form name="addressForm">
 					<div ng-include="'/templates/type.html'" ng-controller="TypeController" ></div>
-					<p>
+					<div class="item-entry">
 						<label for="street">Street</label>
 						<input name="street" type="text" ng-model="each.street" required />
+					</div>
+					<div class="item-entry">
 						<label for="zip">Zip</label>
-						<input name="zip" type="hidden" ng-model="each.zip" />
-						<md-autocomplete md-selected-item="each.zip" md-search-text="searchTextZip" md-items="zip in getAllSuggestionsWithSearch('zip', searchTextZip, 10) | filter:searchTextZip" md-item-text="zip" md-require-match="false" md-autoselect="true" md-min-length="0" required>
-							<span md-highlight-text="searchTextZip">{{zip}}</span>
-						</md-autocomplete>
+						<div class="item-value">
+							<input name="zip" type="hidden" ng-model="each.zip" />
+							<md-autocomplete md-selected-item="each.zip" md-search-text="searchTextZip" md-items="zip in getAllSuggestionsWithSearch('zip', searchTextZip, 10) | filter:searchTextZip" md-item-text="zip" md-require-match="false" md-autoselect="true" md-min-length="0" required>
+								<span md-highlight-text="searchTextZip">{{zip}}</span>
+							</md-autocomplete>
+						</div>
+					</div>
+					<div class="item-entry">
 						<label for="city">City</label>
-						<input name="city" type="hidden" ng-model="each.city" />
-						<md-autocomplete md-selected-item="each.city" md-search-text="searchTextCity" md-items="city in getAllSuggestionsWithSearch('city', searchTextCity, 10) | filter:searchTextCity" md-item-text="city" md-require-match="false" md-autoselect="true" md-min-length="0" required>
-							<span md-highlight-text="searchTextCity">{{city}}</span>
-						</md-autocomplete>
+						<div class="item-value">
+							<input name="city" type="hidden" ng-model="each.city" />
+							<md-autocomplete md-selected-item="each.city" md-search-text="searchTextCity" md-items="city in getAllSuggestionsWithSearch('city', searchTextCity, 10) | filter:searchTextCity" md-item-text="city" md-require-match="false" md-autoselect="true" md-min-length="0" required>
+								<span md-highlight-text="searchTextCity">{{city}}</span>
+							</md-autocomplete>
+						</div>
+					</div>
+					<div class="item-entry">
 						<label for="country">Country</label>
-						<input name="country" type="hidden" ng-model="each.country" />
-						<md-autocomplete md-selected-item="each.country" md-search-text="searchTextCountry" md-items="country in getAllSuggestionsWithSearch('country', searchTextCountry, 10) | filter:searchTextCountry" md-item-text="country" md-require-match="false" md-autoselect="true" md-min-length="0" required>
-							<span md-highlight-text="searchTextCountry">{{country}}</span>
-						</md-autocomplete>
+						<div class="item-value">
+							<input name="country" type="hidden" ng-model="each.country" />
+							<md-autocomplete md-selected-item="each.country" md-search-text="searchTextCountry" md-items="country in getAllSuggestionsWithSearch('country', searchTextCountry, 10) | filter:searchTextCountry" md-item-text="country" md-require-match="false" md-autoselect="true" md-min-length="0" required>
+								<span md-highlight-text="searchTextCountry">{{country}}</span>
+							</md-autocomplete>
+						</div>
+					</div>
+					<div>
 						<div ng-if="googleMap" ng-show="addressForm.street.$valid && addressForm.zip.$valid && addressForm.city.$valid">
 							<label for="map">Map</label>
 							<input name="map" type="checkbox" ng-model="each.map" onclick="Tribe.lazyInitGoogleMap(jQuery(this));" />
 						</div>
-					</p>
+					</div>
 					<div class="google-container" ng-if="googleMap && addressForm.street.$valid && addressForm.zip.$valid && addressForm.city.$valid && each.map === true">
 						<div class="google-map" data-address="{{each}}" data-editable="true"></div>
 						<input type="hidden" ng-model="each.lat"/>
@@ -50,7 +64,7 @@
 		<a href="" ng-click="addListEntry(item.addresses, emptyAddress())" title="Add address">+</a>
 	</div>
 
-	<div>
+	<div class="row-fluid" >
 		<h3>Phone Numbers</h3>
 		<ul>
 			<li ng-repeat="each in item.phonenumbers">
@@ -63,7 +77,7 @@
 		<a href="" ng-click="addListEntry(item.phonenumbers, emptyPhoneNumber())" title="Add phone number">+</a>
 	</div>
 
-	<div>
+	<div class="row-fluid" >
 		<h3>E-mail</h3>
 		<ul>
 			<li ng-repeat="each in item.emails">
@@ -76,26 +90,28 @@
 		<a href="" ng-click="addListEntry(item.emails, emptyEmail())" title="Add E-mail address">+</a>
 	</div>
 
-	<div>
+	<div class="row-fluid" >
 		<h3>Various</h3>
-		<div>
-			<span>Birthday</span>
-			<md-datepicker ng-model="item.birthday" md-placeholder="{{today()}}"></md-datepicker>
+		<div >
+			<span class="item-key">Birthday</span>
+			<div class="item-value">
+				<md-datepicker ng-model="item.birthday" md-placeholder="{{today()}}"></md-datepicker>
+			</div>
 		</div>
-		<p>
+		<p >
 			<label for="item.description">Description</label>
 			<textarea name="item.description" type="text" ng-model="item.description"/>
 		</p>
 	</div>
 
-	<div>
+	<div class="row-fluid" >
 		<h3>Groups</h3>
 		<ul>
 			<li ng-repeat="group in getGroups(item)">
 				<span>{{group.name}}</span>
 				<a href="" ng-click="removeGroup(item.groups, group)" title="Remove from group">-</a>
 			</li>
-			<li>
+			<li >
 				<md-autocomplete md-selected-item="addableGroup" md-item-text="group.name" md-search-text="searchText" md-items="group in getAddableGroups(item.groups) | filter:{$:searchText}:false" md-item-text="group.name" md-require-match="false" md-no-cache="true" md-autoselect="true" md-min-length="0">
 					<span md-highlight-text="searchText">{{group.name}}</span>
 				</md-autocomplete>
@@ -104,9 +120,9 @@
 		</ul>
 	</div>
 
-	<div>
+	<div class="row-fluid controls" >
 		<a href="" ng-click="goBack()" class="btn btn-default" ng-show="form.$pristine">{{textBack}}</a>
-		<a href="" ng-click="goBack()" class="btn btn-default btn-danger" ng-show="form.$dirty">{{textCancel}}</a>
+		<a href="" ng-click="cancelItemConfirmed($event)" class="btn btn-default btn-danger" ng-show="form.$dirty">{{textCancel}}</a>
 		<input type="submit" class="btn btn-default btn-primary" value="{{textSave}}" ng-disabled="form.$invalid || form.$error.$required"/>
 	</div>
 </form>

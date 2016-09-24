@@ -15,6 +15,7 @@
 *.json
 **/node_modules
 *.app
+**/lib
 
 # latex
 /texput.log

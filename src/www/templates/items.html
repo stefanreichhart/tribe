@@ -1,28 +1,48 @@
-<form name="filter">
-	<label for="searchText">Suchen</label>
-	<input name="searchText" type="text" ng-model="searchText" />
-	<a href="" ng-click="resetSearch()">x</a>
-</form>
+<nav class="nav-mobile-menu">
+	<input type="checkbox" id="nav-mobile-toggle" ng-model="toggle" no-autocomplete>
+	<label for="nav-mobile-toggle" class="glyphicon glyphicon-menu-hamburger"><span class="hidden">Menu</span></label>
+</nav>
 
-<ul>
-	<li>
-		<span href="" class="link active" ng-show="!selectedGroup">ALL</span>
-		<a ng-href="#{{viewItemsUrl()}}" ng-show="!!selectedGroup">ALL</a>
-	</li>
-	<li ng-repeat="group in groups | orderBy: 'name'">
-		<span href="" class="link active" ng-show="group == selectedGroup">{{group.name}}</span>
-		<a class="link" href="#{{groupUrl(group.id)}}" ng-show="group != selectedGroup">{{group.name}}</a>
-	</li>
-</ul>
+<nav class="row-fluid items-nav" ng-show="toggle">
+	<div>
+		<label for="searchText"><h4>Filter / Suche</h4></label>
+		<div>
+			<input class="input-deletable" name="searchText" type="text" ng-model="searchText" />
+			<a class="nav-link nav-delete" href="" ng-click="resetSearch()" ng-hide="!searchText">x</a>
+		</div>
+	</div>
+	<div>
+		<h4>Groups</h4>
+		<ul>
+			<li>
+				<span href="" class="link active" ng-show="!selectedGroup">ALL</span>
+				<a ng-href="#{{viewItemsUrl()}}" ng-show="!!selectedGroup">ALL</a>
+			</li>
+			<li ng-repeat="group in groups | orderBy: 'name'">
+				<span href="" class="link active" ng-show="group == selectedGroup">{{group.name}}</span>
+				<a class="link" href="#{{groupUrl(group.id)}}" ng-show="group != selectedGroup">{{group.name}}</a>
+			</li>
+		</ul>
+	</div>
+	</form>
+</nav>
 
-<div class="container-fluid">
-	<ng-pluralize count="filteredGroupItems.length" when="{ 0: 'No items available for display', 1: '1 item displayed from group {{selectedGroup.name}}', 'other': '{{filteredGroupItems.length}} / {{selectedGroupItems.length}} items displayed from group {{selectedGroup.name}}' }"></ng-pluralize>
-	<ul ng-show="filteredGroupItems.length" class="items row">
+<div class="row-fluid items-list">	
+	<p class="border-bottom">
+		<ng-pluralize count="filteredGroupItems.length" when="{ 0: 'No items available for display', 1: '1 item displayed from group {{selectedGroup.name}}', 'other': '{{filteredGroupItems.length}} / {{selectedGroupItems.length}} items displayed from group {{selectedGroup.name}}' }"></ng-pluralize>
+	</p>
+	<hr>
+	<ul ng-show="filteredGroupItems.length" class="items list-unstyled">
 		<li ng-repeat="item in filteredGroupItems = (selectedGroupItems | tokens:searchText)" class="item col-md-2 col-sm-3 col-xs-6">
 			<a href="#{{viewItemUrl(item)}}">
 				<div class="container-ratio">
 					<div class="content-ratio">
 						<img class="item-poster" ng-src="{{item.poster}}">
+						<div class="item-actions">
+							<a href="" ng-click="removeItemFromGroup(item, selectedGroup, $event)" class="glyphicon glyphicon-minus item-action item-remove" ng-if="selectedGroup != undefined" title="Remove member from group"><span class="hidden">Remove member from group</span></a>
+							<a href="" ng-click="removeItemConfirmed(item, $event)" class="glyphicon glyphicon-trash item-action item-delete"  title="Remove member"><span class="hidden">Remove member</span></a>
+						</div>
+						
 					</div>
 				</div>
 				<h2>
@@ -31,8 +51,11 @@
 				</h2>
 			</a>
 		</li>
-		<li>
-			<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member">+</a>
-		</li>
 	</ul>
+	<hr ng-show="filteredGroupItems.length">
+	<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member" class="btn btn-primary">Add member</a>
 </div>
+
+<nav class="nav-mobile-scroll" tribe-Scroll-Top>
+	<a href="" class="glyphicon glyphicon-chevron-up nav-link nav-scroll-top" ><span class="hidden">Top</span></a>
+</nav>

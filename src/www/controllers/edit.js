@@ -37,5 +37,5 @@ application.controller("KeyValueAutocompleterController", function($scope, $log)
 			suggestions.splice(0, 0, searchText);
 		}
 		return suggestions;
-	}
+	};
 });

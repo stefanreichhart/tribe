@@ -1,12 +1,6 @@
-<span>Type</span>
-<md-autocomplete md-selected-item="each.type" md-search-text="searchTextType" md-items="type in getAllSuggestionsWithSearch(searchTextType) | filter:searchTextType" md-item-text="type" md-require-match="false" md-autoselect="true" md-min-length="0" required>
-	<span md-highlight-text="searchTextType">{{type}}</span>
-</md-autocomplete>
-
-<!--
-<select name="selectType" ng-model="each.type" required>
-	<option value="">---Please select---</option>
-	<option value="private">Private</option>
-	<option value="work">Work</option>
-</select>
--->
+<span class="item-key">Type</span>
+<div class="item-value">
+	<md-autocomplete md-selected-item="each.type" md-search-text="searchTextType" md-items="type in getAllSuggestionsWithSearch(searchTextType) | filter:searchTextType" md-item-text="type" md-require-match="false" md-autoselect="true" md-min-length="0" required>
+		<span md-highlight-text="searchTextType">{{type}}</span>
+	</md-autocomplete>
+</div>
