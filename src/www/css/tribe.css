@@ -20,6 +20,10 @@ h1 {
 	padding-left: 35px;
 }
 
+hr {
+	width: 100%;
+}
+
 .nav-mobile-menu {
 	position: absolute;
 	top: 0;
@@ -114,12 +118,14 @@ h1 {
 
 .item-actions {
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: -5px;
+	left: -5px;
 	display: none;
 	background-color: white;
 	border-radius: 4px;
-	border: 1px solid lightgray;
+	-webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
 }
 .item:hover .item-actions {
 	display: block;
@@ -128,25 +134,71 @@ h1 {
 .item-action {
 	opacity: 0.5;
 	padding: 6px;
-	margin: 4px;
+	margin-left: 2px;
+	margin-right: 2px;
+	margin-top: 2px;
+	margin-bottom: 3px;
 	border: 1px solid transparent;
-	color: red;
 }
 
 .item:hover .item-action:hover {
 	opacity: 1;
-	color: red;
 	text-decoration: none;
-	border: 1px solid red;
+	border: 1px solid #2e6da4;
 	border-radius: 4px;
+}
+
+.item-action-danger,
+.item:hover .item-action-danger:hover {
+	color: red;
+	
+}
+.item:hover .item-action-danger:hover {
+	border: 1px solid red;
+}
+
+.container-ratio {
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding-bottom: 100%;
+}
+
+.content-ratio {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.content-ratio img {
+	max-width: 100%;
+	max-height: 100%;
+	display: block;
+	margin: auto;
+}
+
+.ui-draggable-dragging {
+	box-shadow: 0 0 2px 0px lightgray;
+}
+
+.ui-droppable-hover {
+	outline: 1px solid gray;
+	outline-offset: 4px;
+	background-color: white;
+	z-index: 1;
 }
 
 /* view */
 
 .item-poster {
-	max-width: 100%;
+	max-width: 100px;
 	max-height: 100%;
 	display: block;
+	float:left;
+	margin-right: 15px;
+	margin-bottom: 15px;
 }
 
 .item-entries {
@@ -179,20 +231,6 @@ h1 {
 
 /* TODO */
 
-.container-ratio {
-	position: relative;
-	width: 100%;
-	height: 0;
-	padding-bottom: 100%;
-}
-
-.content-ratio {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
 .google-map {
 	width: 500px;
 	height: 100px;

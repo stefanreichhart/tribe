@@ -96,4 +96,21 @@ application.controller("ItemsController", function($scope, $routeParams, $locati
 				// do nothing
 			});
 	};
+	var draggable = null;
+	$scope.onDragStart = function(event, ui, item) {
+		draggable = item;
+		var original = angular.element(event.target);
+		var clone = angular.element(ui.helper);
+		clone.css({
+			width: original.outerWidth(),
+			height: original.outerHeight()
+		});
+	};
+	$scope.onDropSuccess = function(event, ui, group) {
+		if (group && draggable && !Tribe.includes(draggable.groups, group.id)) {
+			draggable.groups.push(group.id);
+		}
+		draggable = null;
+	};
+	
 });
