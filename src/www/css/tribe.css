@@ -32,6 +32,10 @@ hr {
 	width: 100%;
 }
 
+i {
+	margin-right: 4px;
+}
+
 .nav-mobile-menu {
 	position: absolute;
 	top: 0;
@@ -170,6 +174,14 @@ a.item-action-danger:hover {
 a.item-action-danger:hover {
 	border: 1px solid red;
 }
+
+.item:hover .item-action-drag {
+	cursor: move;
+}
+.item:hover .item-action-drag:hover {
+	border: 1px solid transparent;
+}
+
 
 .container-ratio {
 	position: relative;

@@ -101,6 +101,14 @@ Tribe = {
 			return each == object;
 		});
 	},
+	incremented: function(string) {
+		var matches = ("" + string).match(/^(.+\s)(\d+)$/);
+		if (matches && matches.length == 3) {
+			return matches[1] + (Number.parseInt(matches[2]) + 1);
+		} else {
+			return string + " 1";
+		}
+	},
 	initGoogleMaps: function() {
 		jQuery(".google-map").each(function(index, each) {
 			Tribe.initGoogleMap(jQuery(each));

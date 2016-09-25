@@ -17,6 +17,7 @@ application.controller('AddController', function($scope, $routeParams, $log) {
 			"poster": "",
 			"firstname": "",
 			"lastname": "",
+			"position": "",
 			"addresses": [
 				{
 						"type": "private", 
@@ -39,6 +40,7 @@ application.controller('AddController', function($scope, $routeParams, $log) {
 					"number": ""
 				}
 			],
+			"description": "",
 			"groups": $routeParams.id ? [ $routeParams.id ] : []
 		}
 	};

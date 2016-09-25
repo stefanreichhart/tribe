@@ -7,6 +7,7 @@
 	<div>
 		<label for="searchText"><h4>Filter / Suche</h4></label>
 		<form>
+			<i class="glyphicon glyphicon-search"></i>
 			<input class="input-deletable" name="searchText" type="text" ng-model="searchText" />
 			<a class="nav-link nav-delete" href="" ng-click="resetSearch()" ng-hide="!searchText">x</a>
 		</form>
@@ -15,8 +16,8 @@
 		<h4>Groups</h4>
 		<ul>
 			<li>
-				<span href="" class="link active" ng-show="!selectedGroup">ALL</span>
-				<a ng-href="#{{viewItemsUrl()}}" ng-show="!!selectedGroup">ALL</a>
+				<span href="" class="link active" ng-show="!selectedGroup">All members</span>
+				<a ng-href="#{{viewItemsUrl()}}" ng-show="!!selectedGroup">All members</a>
 			</li>
 			<li ng-repeat="group in groups | orderBy: 'name'" jqyoui-droppable="{multiple:true,onDrop:'onDropSuccess(group)'}" ng-model="droppable" data-drop="true">
 				<span href="" class="link active" ng-show="group == selectedGroup">{{group.name}}</span>
@@ -25,15 +26,21 @@
 		</ul>
 	</div>
 		<h4>Actions</h4>
-		<ul>
+		<ul class="list-unstyled">
 			<li>
-				<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member">New member</a>
+				<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member"><i class="glyphicon glyphicon-plus"></i>New member</a>
 			</li>
 			<li ng-show="!!selectedGroup" >
-				<a href="#{{editGroupUrl(selectedGroup)}}" title="Edit group">Edit group</a>
+				<a href="#{{editGroupUrl(selectedGroup)}}" title="Edit group"><i class="glyphicon glyphicon-pencil"></i>Edit group</a>
+			</li>
+			<li ng-show="!!selectedGroup" >
+				<a href="" ng-click="removeGroupConfirmed(selectedGroup)" title="Remove group"><i class="glyphicon glyphicon-trash"></i>Remove group</a>
+			</li>
+			<li ng-show="!!selectedGroup" >
+				<a href="" ng-click="cloneGroup(selectedGroup)" title="Clone group"><i class="glyphicon glyphicon-star"></i>Clone group</a>
 			</li>
 			<li>
-				<a href="#{{addGroupUrl()}}" title="Add group">New group</a>
+				<a href="#{{addGroupUrl()}}" title="Add group"><i class="glyphicon glyphicon-plus"></i>New group</a>
 			</li>
 		</ul>
 	</div>
