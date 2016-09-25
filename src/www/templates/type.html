@@ -1,6 +1,3 @@
-<span class="item-key">Type</span>
-<div class="item-value">
-	<md-autocomplete md-selected-item="each.type" md-search-text="searchTextType" md-items="type in getAllSuggestionsWithSearch(searchTextType) | filter:searchTextType" md-item-text="type" md-require-match="false" md-autoselect="true" md-min-length="0" required>
-		<span md-highlight-text="searchTextType">{{type}}</span>
-	</md-autocomplete>
-</div>
+<md-autocomplete md-selected-item="each.type" md-search-text="searchTextType" md-items="type in getAllSuggestionsWithSearch(searchTextType) | filter:searchTextType" md-item-text="type" md-require-match="false" md-autoselect="true" md-min-length="0" placeholder="Type / Purpose" required>
+	<span md-highlight-text="searchTextType">{{type}}</span>
+</md-autocomplete>

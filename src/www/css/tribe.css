@@ -131,7 +131,8 @@ hr {
 	display: block;
 }
 
-.item-action {
+.item-action,
+a.item-action {
 	opacity: 0.5;
 	padding: 6px;
 	margin-left: 2px;
@@ -139,9 +140,11 @@ hr {
 	margin-top: 2px;
 	margin-bottom: 3px;
 	border: 1px solid transparent;
+	text-decoration: none;
 }
 
-.item:hover .item-action:hover {
+.item-action:hover,
+a.item-action:hover {
 	opacity: 1;
 	text-decoration: none;
 	border: 1px solid #2e6da4;
@@ -149,11 +152,14 @@ hr {
 }
 
 .item-action-danger,
-.item:hover .item-action-danger:hover {
+a.item-action-danger,
+.item-action-danger:hover,
+a.item-action-danger:hover {
 	color: red;
 	
 }
-.item:hover .item-action-danger:hover {
+.item-action-danger:hover,
+a.item-action-danger:hover {
 	border: 1px solid red;
 }
 
@@ -229,6 +235,90 @@ hr {
 	width: auto;
 }
 
+/* edit */
+
+md-autocomplete,
+.input-text {
+	float: left; 
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+md-autocomplete input {
+	width: 150px;
+}
+
+md-autocomplete-wrap {
+	width: 220px;
+}
+
+.edit .item-key {
+	width: auto;
+	min-width: 220px;
+	max-width: 100%;
+	line-height: 40px;
+}
+
+.input-text {
+	height: 40px;
+	min-width: 190px;
+}
+
+
+.area-text {
+	width: 100%;
+	resize: none;
+}
+
+.input-text,
+.area-text,
+.md-datepicker-input {
+	line-height: 40px;
+	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+	border: none;
+	padding: 0px 15px
+}
+
+.md-datepicker-input-container {
+	border: none;
+}
+
+.md-datepicker-calendar,
+md-virtual-repeat-container {
+	background-color: white;
+}
+
+md-virtual-repeat-container .selected {
+	background-color: gray;
+}
+
+.md-calendar-date:hover > span {
+	border-radius: 40px;
+	background-color: gray;
+}
+
+.md-calendar-date-today > span {
+	border-radius: 40px;
+	background-color: lightgray;
+}
+
+.md-datepicker-triangle-button.md-button.md-icon-button {
+	width: 40px;
+	height: 40px;
+	top: 10px;
+	right: 10px;
+
+}
+
+.md-datepicker-input-container {
+	padding: 0px;
+}
+
+.edit .item-street {
+	width: 100%;
+}
+
+
 /* TODO */
 
 .google-map {
@@ -238,9 +328,8 @@ hr {
 
 
 
-form .ng-invalid {
-	border: 2px solid red !important;
-	background-color: red !important;
+form input.ng-invalid {
+	outline: 2px solid orange !important;
 }
 .link.active {
 	font-weight: bold;

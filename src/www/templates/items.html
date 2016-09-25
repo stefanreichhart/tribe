@@ -39,10 +39,18 @@
 					<div class="content-ratio">
 						<img ng-src="{{item.poster}}">
 						<div class="item-actions">
-							<div class="glyphicon glyphicon-fullscreen item-action item-action-drag"><span class="hidden">Add member to group by drag &amp; drop</span></div>
-							<a href="#{{editItemUrl(item)}}" class="glyphicon glyphicon-pencil item-action item-edit" title="Edit member"><span class="hidden">Edit member</span></a>
-							<a href="" ng-click="removeItemFromGroup(item, selectedGroup, $event)" class="glyphicon glyphicon-minus item-action item-action-danger" ng-if="selectedGroup != undefined" title="Remove member from group"><span class="hidden">Remove member from group</span></a>
-							<a href="" ng-click="removeItemConfirmed(item, $event)" class="glyphicon glyphicon-trash item-action item-action-danger"  title="Remove member"><span class="hidden">Remove member</span></a>
+							<div class="glyphicon glyphicon-fullscreen item-action item-action-drag">
+								<span class="hidden">Add member to group by drag &amp; drop</span>
+							</div>
+							<a href="#{{editItemUrl(item)}}" class="glyphicon glyphicon-pencil item-action item-edit" title="Edit member">
+								<span class="hidden">Edit member</span>
+							</a>
+							<a href="" ng-click="removeItemFromGroup(item, selectedGroup, $event)" class="glyphicon glyphicon-minus item-action item-action-danger" ng-if="selectedGroup != undefined" title="Remove member from group">
+								<span class="hidden">Remove member from group</span>
+							</a>
+							<a href="" ng-click="removeItemConfirmed(item, $event)" class="glyphicon glyphicon-trash item-action item-action-danger"  title="Remove member">
+								<span class="hidden">Remove member</span>
+							</a>
 						</div>
 					</div>
 				</div>
