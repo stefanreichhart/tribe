@@ -6,10 +6,10 @@
 <nav class="row-fluid items-nav" ng-show="toggle">
 	<div>
 		<label for="searchText"><h4>Filter / Suche</h4></label>
-		<div>
+		<form>
 			<input class="input-deletable" name="searchText" type="text" ng-model="searchText" />
 			<a class="nav-link nav-delete" href="" ng-click="resetSearch()" ng-hide="!searchText">x</a>
-		</div>
+		</form>
 	</div>
 	<div>
 		<h4>Groups</h4>
@@ -24,7 +24,19 @@
 			</li>
 		</ul>
 	</div>
-	</form>
+		<h4>Actions</h4>
+		<ul>
+			<li>
+				<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member">Add member</a>
+			</li>
+			<li>
+				<a href="" title="Add group">Add group</a>
+			</li>
+			<li>
+				<a href="" title="Edit group">Edit group</a>
+			</li>
+		</ul>
+	</div>
 </nav>
 
 <div class="row-fluid items-list">	
@@ -61,8 +73,6 @@
 			</a>
 		</li>
 	</ul>
-	<hr ng-show="filteredGroupItems.length">
-	<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member" class="btn btn-primary">Add member</a>
 </div>
 
 <nav class="nav-mobile-scroll" tribe-Scroll-Top>

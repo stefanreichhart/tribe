@@ -7,11 +7,19 @@
 	box-sizing: border-box;
 }
 
+.nofloat {
+	float: none !important;
+}
+
 .controls {
 	margin-top: 20px;
 	margin-bottom: 20px;
 	padding-top: 20px;
 	border-top: 1px solid gray;
+}
+
+.link.active {
+	font-weight: bold;
 }
 
 /* items */
@@ -199,6 +207,8 @@ a.item-action-danger:hover {
 /* view */
 
 .item-poster {
+	min-width: 100px;
+	min-height: 100px;
 	max-width: 100px;
 	max-height: 100%;
 	display: block;
@@ -227,43 +237,68 @@ a.item-action-danger:hover {
 	color: gray;
 	width: 80px;
 	margin-right: 20px;
-	text-align: right;
 }
 .item-value {
 	float: left;
-	display: block;
-	width: auto;
 }
 
 /* edit */
 
 md-autocomplete,
 .input-text {
-	float: left; 
 	margin-right: 10px;
 	margin-bottom: 10px;
 }
 
-md-autocomplete input {
-	width: 150px;
-}
-
-md-autocomplete-wrap {
-	width: 220px;
-}
-
 .edit .item-key {
-	width: auto;
-	min-width: 220px;
-	max-width: 100%;
 	line-height: 40px;
 }
 
 .input-text {
-	height: 40px;
-	min-width: 190px;
+	height: 40px; 
 }
 
+.input-text,
+.edit .item-value,
+md-autocomplete,
+md-autocomplete-wrap,
+md-autocomplete input {
+	float: left;
+	width: 100%;
+	display: block;
+}
+
+.edit .item-key {
+	float: left;
+	width: 50%;
+	display: block;
+}
+
+@media (min-width: 640px) {
+	.input-text {
+		height: 40px;
+		min-width: 190px;
+		width: auto;
+	}
+	.edit .item-key {
+		min-width: 220px; 
+	}
+	.edit .item-key,
+	.edit .item-value,
+	md-autocomplete {
+		width: auto;
+	}
+	md-autocomplete input {
+		width: 150px;
+	}
+
+	md-autocomplete-wrap {
+		width: 220px;
+	}
+	.item-key {
+		text-align: right;
+	}
+}
 
 .area-text {
 	width: 100%;
@@ -318,19 +353,14 @@ md-virtual-repeat-container .selected {
 	width: 100%;
 }
 
+form input.ng-invalid {
+	outline: 2px solid orange !important;
+}
+
 
 /* TODO */
 
 .google-map {
 	width: 500px;
 	height: 100px;
-}
-
-
-
-form input.ng-invalid {
-	outline: 2px solid orange !important;
-}
-.link.active {
-	font-weight: bold;
 }

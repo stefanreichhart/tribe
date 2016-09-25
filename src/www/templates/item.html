@@ -5,7 +5,9 @@
 		<label for="item.firstname" class="hidden">Firstname</label>
 		<input name="item.firstname" type="text" class="input-text" ng-model="item.firstname" placeholder="Firstname" title="Fistname" required />
 		<label for="item.lastname" class="hidden">Lastname</label>
-		<input name="item.lastname" type="text" class="input-text" ng-model="item.lastname" placeholder="Lastname" title="Lastname" required />
+		<input name="item.lastname" type="text" class="input-text nofloat" ng-model="item.lastname" placeholder="Lastname" title="Lastname" required />
+		<label for="item.position" class="hidden">Position</label>
+		<input name="item.position" type="text" class="input-text" ng-model="item.position" placeholder="Position" title="Position" required />
 	</h2>
 
 	<div class="row-fluid" >
@@ -65,7 +67,7 @@
 			<li ng-repeat="each in item.phonenumbers" class="item-entry">
 				<div class="item-key" ng-include="'/templates/type.html'" ng-controller="TypeController" ></div>
 				<label for="phonenumber.phone" class="hidden">Number</label>
-				<input name="phonenumber.phone" type="tel" ng-model="each.phone" class="input-text" placeholder="Your Phone number" required/>
+				<input name="phonenumber.phone" type="tel" ng-model="each.phone" class="input-text" placeholder="Phone number" required/>
 				<a href="" ng-click="removeListEntry(item.phonenumbers, each)" class="item-action item-action-danger glyphicon glyphicon-trash" title="Remove phone number"><span class="hidden">Remove phone number</span></a>
 				<a href="" ng-if="$last" ng-click="addListEntry(item.phonenumbers, emptyPhoneNumber())" class="glyphicon glyphicon-plus item-action" title="Add phone number"><span class="hidden">Add phone number</span></a>
 			</li>
@@ -78,7 +80,7 @@
 			<li ng-repeat="each in item.emails" class="item-entry">
 				<div class="item-key" ng-include="'/templates/type.html'" ng-controller="TypeController" ></div>
 				<label for="email.email" class="hidden">E-Mail</label>
-				<input name="email.email" type="email" ng-model="each.email" class="input-text" placeholder="Your E-mail address" required/>
+				<input name="email.email" type="email" ng-model="each.email" class="input-text" placeholder="E-mail address" required/>
 				<a href="" ng-click="removeListEntry(item.emails, each)" class="item-action item-action-danger glyphicon glyphicon-trash" title="Remove E-mail address"><span class="hidden">Remove E-mail address</span></a>
 				<a href="" ng-if="$last" ng-click="addListEntry(item.emails, emptyEmail())" class="glyphicon glyphicon-plus item-action" title="Add E-mail address"><span class="hidden">Add E-mail address</span></a>
 			</li>
@@ -91,14 +93,14 @@
 		<div >
 			<span class="item-key">Birthday</span>
 			<div class="item-value">
-				<md-datepicker ng-model="item.birthday" md-placeholder="{{today()}}"></md-datepicker>
+				<md-datepicker ng-model="item.birthday" md-placeholder="{{today()}}" placeholder="Birthday"></md-datepicker>
 			</div>
 		</div>
 	</div>
 
 	<div class="row-fluid" >
 		<label for="item.description"><h3>Description</h3></label>
-		<textarea name="item.description" type="text" class="area-text" ng-model="item.description"/>
+		<textarea name="item.description" type="text" class="area-text" ng-model="item.description" placeholder="Description"/>
 	</div>
 
 	<div class="row-fluid" >

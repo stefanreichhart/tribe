@@ -14,6 +14,10 @@ ul {
 	margin-top: 10px;
 }
 
+.btn {
+  margin-bottom: 15px;
+}
+
 /* overrides angular-material */
 
 .md-button {
