@@ -60,7 +60,6 @@ application.controller("ItemsController", function($scope, $routeParams, $locati
 		$location.search("search", undefined);
 	};
 	$scope.searchText = $location.search().search || "";
-	$scope.groups = $scope.database.groups;
 	$scope.selectedGroup = $scope.getGroupbyId($routeParams.id);
 	if (!$scope.hasGroupById($routeParams.id)) {
 		$location.url("/items");

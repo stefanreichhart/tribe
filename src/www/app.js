@@ -30,6 +30,14 @@ application.config(function($routeProvider) {
 			templateUrl: "/templates/edit.html",
 			controller: "EditController"
 		})
+		.when("/edit/group/:id", {
+			templateUrl: "/templates/editGroup.html",
+			controller: "EditGroupController"
+		})
+		.when("/add/group", {
+			templateUrl: "/templates/addGroup.html",
+			controller: "AddGroupController"
+		})
 		.otherwise({
 			redirectTo: "/items"
 		});
@@ -52,6 +60,7 @@ application.config(function($mdDateLocaleProvider) {
 
 application.controller("tribeController", function($scope, $http, $location, $window, $log) {
 	$scope.database = {};
+	$scope.groups = [];
 	$scope.items = [];
 	$scope.error = null;
 	$http.get("/data/database.json")
@@ -61,6 +70,7 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 				$log.debug("loaded", response);
 				$scope.database = response || {};
 				$scope.items = response.items || [];
+				$scope.groups = response.groups || [];
 			}
 		})
 		.error(function(error) {
@@ -75,9 +85,18 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 			return id === each.id || id === "" + each.id;
 		});
 	};
+	$scope.getGroupById = function(id) {
+		return Tribe.detect($scope.groups, function(each, index) {
+			return id === each.id || id === "" + each.id;
+		});
+	};
 	$scope.getNextId = function() {
 		var lastItem = $scope.items[$scope.items.length-1] || {};
 		return (lastItem.id || 0) + 1;
+	};
+	$scope.getNextGroupId = function() {
+		var lastGroup = $scope.groups[$scope.groups.length-1] || {};
+		return (lastGroup.id || 0) + 1;
 	};
 	$scope.editItemUrl = function(item) {
 		return "/edit/" + item.id;
@@ -89,10 +108,16 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 		return "/view/" + item.id;
 	};
 	$scope.addItemUrl = function(group) {
-		return group && group.id ? "/add/item/group/" + group.id : "/add/item";
+		return group ? "/add/item/group/" + group.id : "/add/item";
 	};
 	$scope.viewItemsUrl = function() {
 		return "/items";
+	};
+	$scope.addGroupUrl = function() {
+		return "/add/group";
+	};
+	$scope.editGroupUrl = function(group) {
+		return group ? "/edit/group/" + group.id : "";
 	};
 	$scope.groupUrl = function(id) {
 		return "/group/" + id;

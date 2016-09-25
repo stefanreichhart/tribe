@@ -5,8 +5,8 @@ application.controller('AddController', function($scope, $routeParams, $log) {
 		if ($scope.addableGroup != null) {
 			$scope.addGroup($scope.item.groups, $scope.addableGroup);
 		}
-		originalItem = angular.extend(originalItem, $scope.item);
-		$scope.item = angular.extend({}, originalItem);
+		$scope.originalItem = angular.extend($scope.originalItem, $scope.item);
+		$scope.item = angular.extend({}, $scope.originalItem);
 		$scope.item.id = $scope.getNextId();
 		$scope.items.push($scope.item);
 		$scope.goBack();
@@ -42,9 +42,6 @@ application.controller('AddController', function($scope, $routeParams, $log) {
 			"groups": $routeParams.id ? [ $routeParams.id ] : []
 		}
 	};
-	$scope.textBack = "Back";
-	$scope.textCancel = "Cancel & Back";
-	$scope.textSave = "Save & Back";
-	var originalItem = $scope.emptyItem();
-	$scope.item = angular.extend({}, originalItem);
+	$scope.originalItem = $scope.emptyItem();
+	$scope.item = angular.extend({}, $scope.originalItem);
 });

@@ -27,13 +27,13 @@
 		<h4>Actions</h4>
 		<ul>
 			<li>
-				<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member">Add member</a>
+				<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member">New member</a>
+			</li>
+			<li ng-show="!!selectedGroup" >
+				<a href="#{{editGroupUrl(selectedGroup)}}" title="Edit group">Edit group</a>
 			</li>
 			<li>
-				<a href="" title="Add group">Add group</a>
-			</li>
-			<li>
-				<a href="" title="Edit group">Edit group</a>
+				<a href="#{{addGroupUrl()}}" title="Add group">New group</a>
 			</li>
 		</ul>
 	</div>

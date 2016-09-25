@@ -1,6 +1,9 @@
 var application = angular.module("tribeApplication");
 
 application.controller("ItemController", function($scope, $routeParams, $location, $mdDateLocale, $mdDialog, $log) {
+	$scope.textBack = "Back";
+	$scope.textCancel = "Cancel & Back";
+	$scope.textSave = "Save & Back";
 	$scope.today = function() {
 		return $mdDateLocale.formatDate(new Date());
 	};

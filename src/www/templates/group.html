@@ -1,0 +1,14 @@
+<form name="form" ng-controller="GroupController" ng-submit="form.$valid && submit()" ng-cloak class="edit">
+	
+	<h2 class="row-fluid" >
+		<label for="group.name" class="hidden">Name</label>
+		<input name="group.name" type="text" class="input-text" ng-model="group.name" placeholder="Name" title="Name" required />
+	</h2>
+
+	<div class="row-fluid controls" >
+		<a href="" ng-click="goBack()" class="btn btn-default" ng-show="form.$pristine">{{textBack}}</a>
+		<a href="" ng-click="cancelItemConfirmed($event)" class="btn btn-danger" ng-show="form.$dirty">{{textCancel}}</a>
+		<input type="submit" class="btn btn-primary" value="{{textSave}}" ng-disabled="form.$invalid || form.$error.$required"/>
+	</div>
+
+</form>

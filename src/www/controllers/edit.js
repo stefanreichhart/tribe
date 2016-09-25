@@ -5,19 +5,16 @@ application.controller("EditController", function($scope, $routeParams, $locatio
 		if ($scope.addableGroup != null) {
 			$scope.addGroup($scope.item.groups, $scope.addableGroup);
 		}
-		originalItem = angular.extend(originalItem, $scope.item);
-		$scope.item = angular.extend({}, originalItem);
+		$scope.originalItem = angular.extend($scope.originalItem, $scope.item);
+		$scope.item = angular.extend({}, $scope.originalItem);
 		$scope.goBack();
 	};
-	$scope.textBack = "Back";
-	$scope.textCancel = "Cancel & Back";
-	$scope.textSave = "Save & Back";
-	var originalItem = $scope.getItemById($routeParams.id);
-	if (!originalItem) {
+	$scope.originalItem = $scope.getItemById($routeParams.id);
+	if (!$scope.originalItem) {
 		$log.debug("Item not found", $routeParams.id);
-		$scope.goto($scope.viewItemUrl($scope.item));
+		$location.url($scope.viewItemUrl($scope.item));
 	}
-	$scope.item = angular.extend({}, originalItem);
+	$scope.item = angular.extend({}, $scope.originalItem);
 });
 
 application.controller("KeyValueAutocompleterController", function($scope, $log) {
