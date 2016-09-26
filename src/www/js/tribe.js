@@ -1,5 +1,5 @@
 Tribe = {
-	detect: function(list, callback, defaultItem) {
+	detect: function(list, callback, defaultObject) {
 		if (list && callback) {
 			var each = null;
 			for (var i = 0; i < list.length; i++) {
@@ -9,7 +9,7 @@ Tribe = {
 				}
 			}
 		}
-		return defaultItem;
+		return defaultObject;
 	},
 	select: function(list, callback) {
 		var results = [];
@@ -83,10 +83,10 @@ Tribe = {
 		var list = list || [];
 		var unique = [];
 		for (var i = 0; i < list.length; i++) {
-			var item = list[i];
-			if (cache[item] === undefined) {
-				unique.push(item);
-				cache[item] = item;
+			var object = list[i];
+			if (cache[object] === undefined) {
+				unique.push(object);
+				cache[object] = object;
 			}
 		}
 		return unique;

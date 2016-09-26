@@ -3,7 +3,7 @@
 	<label for="nav-mobile-toggle" class="glyphicon glyphicon-menu-hamburger"><span class="hidden">Menu</span></label>
 </nav>
 
-<nav class="row-fluid items-nav" ng-show="toggle">
+<nav class="row-fluid members-nav" ng-show="toggle">
 	<div>
 		<label for="searchText"><h4>Filter / Suche</h4></label>
 		<form>
@@ -17,18 +17,18 @@
 		<ul>
 			<li>
 				<span href="" class="link active" ng-show="!selectedGroup">All members</span>
-				<a ng-href="#{{viewItemsUrl()}}" ng-show="!!selectedGroup">All members</a>
+				<a ng-href="#{{mainViewUrl()}}" ng-show="!!selectedGroup">All members</a>
 			</li>
 			<li ng-repeat="group in groups | orderBy: 'name'" jqyoui-droppable="{multiple:true,onDrop:'onDropSuccess(group)'}" ng-model="droppable" data-drop="true">
 				<span href="" class="link active" ng-show="group == selectedGroup">{{group.name}}</span>
-				<a class="link" href="#{{groupUrl(group.id)}}" ng-show="group != selectedGroup">{{group.name}}</a>
+				<a class="link" href="#{{viewGroupUrl(group)}}" ng-show="group != selectedGroup">{{group.name}}</a>
 			</li>
 		</ul>
 	</div>
 		<h4>Actions</h4>
 		<ul class="list-unstyled">
 			<li>
-				<a href="#{{addItemUrl(selectedGroup)}}" title="Add new tribe member"><i class="glyphicon glyphicon-plus"></i>New member</a>
+				<a href="#{{addMemberUrl(selectedGroup)}}" title="Add new tribe member"><i class="glyphicon glyphicon-plus"></i>New member</a>
 			</li>
 			<li ng-show="!!selectedGroup" >
 				<a href="#{{editGroupUrl(selectedGroup)}}" title="Edit group"><i class="glyphicon glyphicon-pencil"></i>Edit group</a>
@@ -46,36 +46,36 @@
 	</div>
 </nav>
 
-<div class="row-fluid items-list">	
+<div class="row-fluid members-list">	
 	<p class="border-bottom">
-		<ng-pluralize count="filteredGroupItems.length" when="{ 0: 'No items available for display', 1: '1 item displayed', 'other': '{{filteredGroupItems.length}} / {{selectedGroupItems.length}} items displayed' }"></ng-pluralize>
+		<ng-pluralize count="filteredGroupMembers.length" when="{ 0: 'No members available for display', 1: '1 member displayed', 'other': '{{filteredGroupMembers.length}} / {{selectedGroupMembers.length}} members displayed' }"></ng-pluralize>
 	</p>
 	<hr>
-	<ul ng-show="filteredGroupItems.length" class="items list-unstyled">
-		<li ng-repeat="item in filteredGroupItems = (selectedGroupItems | tokens:searchText)" class="item col-md-2 col-sm-3 col-xs-6" data-jqyoui-options="{revert: 'invalid', helper: 'clone', handle: '.item-action-drag', opacity: 0.6}" jqyoui-draggable="{animate: true, placeholder: 'keep', onStart:'onDragStart(item)', helper: 'clone'}" data-drag="true">
-			<a href="#{{viewItemUrl(item)}}">
+	<ul ng-show="filteredGroupMembers.length" class="members list-unstyled">
+		<li ng-repeat="member in filteredGroupMembers = (selectedGroupMembers | tokens:searchText)" class="member col-md-2 col-sm-3 col-xs-6" data-jqyoui-options="{revert: 'invalid', helper: 'clone', handle: '.member-action-drag', opacity: 0.6}" jqyoui-draggable="{animate: true, placeholder: 'keep', onStart:'onDragStart(member)', helper: 'clone'}" data-drag="true">
+			<a href="#{{viewMemberUrl(member)}}">
 				<div class="container-ratio">
 					<div class="content-ratio">
-						<img ng-src="{{item.poster}}">
-						<div class="item-actions">
-							<div class="glyphicon glyphicon-fullscreen item-action item-action-drag">
+						<img ng-src="{{member.poster}}">
+						<div class="member-actions">
+							<div class="glyphicon glyphicon-fullscreen member-action member-action-drag">
 								<span class="hidden">Add member to group by drag &amp; drop</span>
 							</div>
-							<a href="#{{editItemUrl(item)}}" class="glyphicon glyphicon-pencil item-action item-edit" title="Edit member">
+							<a href="#{{editMemberUrl(member)}}" class="glyphicon glyphicon-pencil member-action member-edit" title="Edit member">
 								<span class="hidden">Edit member</span>
 							</a>
-							<a href="" ng-click="removeItemFromGroup(item, selectedGroup, $event)" class="glyphicon glyphicon-minus item-action item-action-danger" ng-if="selectedGroup != undefined" title="Remove member from group">
+							<a href="" ng-click="removeMemberFromGroup(member, selectedGroup, $event)" class="glyphicon glyphicon-minus member-action member-action-danger" ng-if="selectedGroup != undefined" title="Remove member from group">
 								<span class="hidden">Remove member from group</span>
 							</a>
-							<a href="" ng-click="removeItemConfirmed(item, $event)" class="glyphicon glyphicon-trash item-action item-action-danger"  title="Remove member">
+							<a href="" ng-click="removeMemberConfirmed(member, $event)" class="glyphicon glyphicon-trash member-action member-action-danger"  title="Remove member">
 								<span class="hidden">Remove member</span>
 							</a>
 						</div>
 					</div>
 				</div>
 				<h2>
-					<span class="item-firstname">{{item.firstname}}</span>
-					<span class="item-lastname">{{item.lastname}}</span>
+					<span class="member-firstname">{{member.firstname}}</span>
+					<span class="member-lastname">{{member.lastname}}</span>
 				</h2>
 			</a>
 		</li>

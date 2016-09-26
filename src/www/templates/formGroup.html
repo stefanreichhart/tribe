@@ -1,4 +1,4 @@
-<form name="form" ng-controller="GroupController" ng-submit="form.$valid && submit()" ng-cloak class="edit">
+<form name="form" ng-controller="FormGroupController" ng-submit="form.$valid && submit()" ng-cloak class="edit">
 	
 	<h2 class="row-fluid" >
 		<label for="group.name" class="hidden">Name</label>
@@ -7,7 +7,7 @@
 
 	<div class="row-fluid controls" >
 		<a href="" ng-click="goBack()" class="btn btn-default" ng-show="form.$pristine">{{textBack}}</a>
-		<a href="" ng-click="cancelItemConfirmed($event)" class="btn btn-danger" ng-show="form.$dirty">{{textCancel}}</a>
+		<a href="" ng-click="cancelMemberConfirmed($event)" class="btn btn-danger" ng-show="form.$dirty">{{textCancel}}</a>
 		<input type="submit" class="btn btn-primary" value="{{textSave}}" ng-disabled="form.$invalid || form.$error.$required"/>
 	</div>
 

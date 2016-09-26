@@ -1,9 +1,9 @@
 var application = angular.module("tribeApplication");
 
-application.controller("TypeController", function($scope) {
+application.controller("FormTypeController", function($scope) {
 	$scope.defaultSuggestions = [ "home", "work" ];
 	$scope.getSuggestions = function() {
-		var suggestions = angular.extend([], $scope.defaultSuggestions, Tribe.deepSelect($scope.items, 
+		var suggestions = angular.extend([], $scope.defaultSuggestions, Tribe.deepSelect($scope.members, 
 			function(value, key) {
 				return key == "type";
 			}, function(value, key) {

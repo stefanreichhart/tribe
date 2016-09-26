@@ -1,6 +1,6 @@
 var application = angular.module("tribeApplication");
 
-application.controller("ItemController", function($scope, $routeParams, $location, $mdDateLocale, $mdDialog, $log) {
+application.controller("FormMemberController", function($scope, $routeParams, $location, $mdDateLocale, $mdDialog, $log) {
 	$scope.textBack = "Back";
 	$scope.textCancel = "Cancel & Back";
 	$scope.textSave = "Save & Back";
@@ -8,17 +8,17 @@ application.controller("ItemController", function($scope, $routeParams, $locatio
 		return $mdDateLocale.formatDate(new Date());
 	};
 
-	$scope.emptyPhoneNumber = function() { 
+	$scope.newEmptyPhoneNumber = function() { 
 		return {
 			"private": null 
 		};
 	};
-	$scope.emptyEmail = function() { 
+	$scope.newEmptyEmail = function() { 
 		return {
 			"private": null 
 		};
 	};
-	$scope.emptyAddress = function() { 
+	$scope.newEmptyAddress = function() { 
 		return {
 			"type": null, 
 			"street": null,
@@ -62,11 +62,11 @@ application.controller("ItemController", function($scope, $routeParams, $locatio
 			$scope.searchText = null;
 		}
 	};
-	$scope.cancelItemConfirmed = function(event) {
+	$scope.cancelMemberConfirmed = function(event) {
 		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm()
 			.title("Discard changes?")
-			.htmlContent("Are you sure you want to discard all changes made to the member " + $scope.item.firstname + " " + $scope.item.lastname + "? <br />This action cannot be undone.")
+			.htmlContent("Are you sure you want to discard all changes made to the member " + $scope.member.firstname + " " + $scope.member.lastname + "? <br />This action cannot be undone.")
 			.targetEvent(event)
 			.ok("Discard changes")
 			.cancel("Cancel");

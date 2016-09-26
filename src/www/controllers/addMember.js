@@ -1,17 +1,17 @@
 var application = angular.module("tribeApplication");
 
-application.controller('AddController', function($scope, $routeParams, $log) {
+application.controller('AddMemberController', function($scope, $routeParams, $log) {
 	$scope.submit = function() {
 		if ($scope.addableGroup != null) {
-			$scope.addGroup($scope.item.groups, $scope.addableGroup);
+			$scope.addGroup($scope.member.groups, $scope.addableGroup);
 		}
-		$scope.originalItem = angular.extend($scope.originalItem, $scope.item);
-		$scope.item = angular.extend({}, $scope.originalItem);
-		$scope.item.id = $scope.getNextId();
-		$scope.items.push($scope.item);
+		$scope.originalMember = angular.extend($scope.originalMember, $scope.member);
+		$scope.member = angular.extend({}, $scope.originalMember);
+		$scope.member.id = $scope.getNextMemberId();
+		$scope.members.push($scope.member);
 		$scope.goBack();
 	};
-	$scope.emptyItem = function() {
+	$scope.newEmptyMember = function() {
 		return {
 			"id": null,
 			"poster": "",
@@ -44,6 +44,6 @@ application.controller('AddController', function($scope, $routeParams, $log) {
 			"groups": $routeParams.id ? [ $routeParams.id ] : []
 		}
 	};
-	$scope.originalItem = $scope.emptyItem();
-	$scope.item = angular.extend({}, $scope.originalItem);
+	$scope.originalMember = $scope.newEmptyMember();
+	$scope.member = angular.extend({}, $scope.originalMember);
 });

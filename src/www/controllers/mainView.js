@@ -1,51 +1,19 @@
 var application = angular.module("tribeApplication");
 
-application.constant("googleMap", false);
-
-application.filter("tokens", function($filter, $location, $window) {
-	return function(list, search) {
-		var results = list;
-		if (search != undefined && search != null && !!(""+search).replace(/\s+/g, "")) {
-			$location.search("search", search);
-			var tokens = Tribe.unique(Tribe.select(search.split(" "), function(token, tokenIndex) {
-				return !!token;
-			}));
-			for (var i = 0; i < tokens.length; i++) {
-				var token = tokens[i];
-				results = $filter("filter")(results, token, "$"); // case insensitive 
-			}
-			
-		} 
-		return results;
-	};
-});
-
-application.directive("tribeScrollTop", function() {
-	return {
-		link: function($scope, $element) {
-			$element.on('click', function() {
-				angular.element("html,body").animate({
-					scrollTop: 0
-				}, "slow");
-			});
-		}
-	}
-});
-
-application.controller("ItemsController", function($scope, $routeParams, $location, $mdDialog, $log) {
-	$scope.getItemsByGroup = function(id) {
+application.controller("MainViewController", function($scope, $routeParams, $location, $mdDialog, $log) {
+	$scope.getMembersByGroup = function(id) {
 		if (id === undefined || id === null) {
-			return $scope.database.items;
+			return $scope.members;
 		} else {
-			return Tribe.select($scope.database.items, function(item, itemIndex) {
-				return Tribe.anySatisfy(item.groups, function(group, groupIndex) {
+			return Tribe.select($scope.members, function(member, memberIndex) {
+				return Tribe.anySatisfy(member.groups, function(group, groupIndex) {
 					return group == id;
 				});
 			});
 		}
 	};
 	$scope.getGroupbyId = function(id) {
-		return Tribe.detect($scope.database.groups, function(group, groupIndex) {
+		return Tribe.detect($scope.groups, function(group, groupIndex) {
 			return group.id == id;
 		});
 	};
@@ -61,26 +29,26 @@ application.controller("ItemsController", function($scope, $routeParams, $locati
 	};
 	$scope.searchText = $location.search().search || "";
 	$scope.selectedGroup = $scope.getGroupbyId($routeParams.id);
-	$scope.selectedGroupItems = [];
+	$scope.selectedGroupMembers = [];
 	if (!$scope.hasGroupById($routeParams.id)) {
-		$location.url("/items");
+		$location.url($scope.mainViewUrl());
 	}
 	$scope.refresh = function() {
 		$scope.selectedGroup = $scope.getGroupById($routeParams.id);
-		$scope.selectedGroupItems = $scope.selectedGroup ? $scope.getItemsByGroup($routeParams.id) : $scope.items;
+		$scope.selectedGroupMembers = $scope.selectedGroup ? $scope.getMembersByGroup($routeParams.id) : $scope.members;
 	}
 	$scope.refresh();
-	$scope.removeItemFromGroup = function(item, group, event) {
-		if (item && group) {
-			var index = item.groups.indexOf(group.id);
-			item.groups.splice(index, 1);	
+	$scope.removeMemberFromGroup = function(member, group, event) {
+		if (member && group) {
+			var index = member.groups.indexOf(group.id);
+			member.groups.splice(index, 1);	
 			$scope.refresh();
 		}
 	};
-	$scope.removeItem = function(item) {
-		if (item) {
-			var index = $scope.items.indexOf(item);
-			$scope.items.splice(index, 1);
+	$scope.removeMember = function(member) {
+		if (member) {
+			var index = $scope.members.indexOf(member);
+			$scope.members.splice(index, 1);
 			$scope.refresh();
 		}
 	};
@@ -88,15 +56,15 @@ application.controller("ItemsController", function($scope, $routeParams, $locati
 		if (group) {
 			var index = $scope.groups.indexOf(group);
 			$scope.groups.splice(index, 1);
-			angular.forEach($scope.items, function(item) {
-				$scope.removeItemFromGroup(item, group);
+			angular.forEach($scope.members, function(member) {
+				$scope.removeMemberFromGroup(member, group);
 			});
 			$scope.refresh();
 		}
 	};
-	$scope.addItemToGroup = function(item, group) {
-		if (item && group && !Tribe.includes(item.groups, group.id)) {
-			item.groups.push(group.id);
+	$scope.addMemberToGroup = function(member, group) {
+		if (member && group && !Tribe.includes(member.groups, group.id)) {
+			member.groups.push(group.id);
 			$scope.refresh();
 		}
 	};
@@ -106,10 +74,10 @@ application.controller("ItemsController", function($scope, $routeParams, $locati
 			newGroup.id = $scope.getNextGroupId();
 			newGroup.name = Tribe.incremented(newGroup.name);
 			$scope.groups.push(newGroup);
-			angular.forEach($scope.items, function(item, index) {
-			if (item && group && Tribe.includes(item.groups, group.id)) {
+			angular.forEach($scope.members, function(member, index) {
+			if (member && group && Tribe.includes(member.groups, group.id)) {
 					
-					$scope.addItemToGroup(item, newGroup);
+					$scope.addMemberToGroup(member, newGroup);
 				}
 			});
 			$scope.refresh();
@@ -131,25 +99,25 @@ application.controller("ItemsController", function($scope, $routeParams, $locati
 				// do nothing
 			});
 	};
-	$scope.removeItemConfirmed = function(item, event) {
+	$scope.removeMemberConfirmed = function(member, event) {
 		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm()
 			.title("Remove member?")
-			.htmlContent("Are you sure you want to remove the member " + item.firstname + " " + item.lastname + "? <br />This action cannot be undone.")
+			.htmlContent("Are you sure you want to remove the member " + member.firstname + " " + member.lastname + "? <br />This action cannot be undone.")
 			.targetEvent(event)
 			.ok("Remove member")
 			.cancel("Cancel");
 
 		$mdDialog.show(confirm)
 			.then(function() {
-				$scope.removeItem(item);
+				$scope.removeMember(member);
 			}, function() {
 				// do nothing
 			});
 	};
 	var draggable = null;
-	$scope.onDragStart = function(event, ui, item) {
-		draggable = item;
+	$scope.onDragStart = function(event, ui, member) {
+		draggable = member;
 		var original = angular.element(event.target);
 		var clone = angular.element(ui.helper);
 		clone.css({

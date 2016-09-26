@@ -8,12 +8,12 @@ application.controller("AddGroupController", function($scope, $log) {
 		$scope.groups.push($scope.group);
 		$scope.goBack();
 	};
-	$scope.emptyGroup = function() {
+	$scope.newEmptyGroup = function() {
 		return {
 			"id": null,
 			"name": ""
 		}
 	};
-	$scope.originalGroup = $scope.emptyGroup();
+	$scope.originalGroup = $scope.newEmptyGroup();
 	$scope.group = angular.extend({}, $scope.originalGroup);
 });

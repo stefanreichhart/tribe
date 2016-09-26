@@ -9,7 +9,7 @@ application.controller("EditGroupController", function($scope, $routeParams, $lo
 	$scope.originalGroup = $scope.getGroupById($routeParams.id);
 	if (!$scope.originalGroup) {
 		$log.debug("Group not found", $routeParams.id);
-		$location.url($scope.viewItemsUrl());
+		$location.url($scope.mainViewUrl());
 	}
 	$scope.group = angular.extend({}, $scope.originalGroup);
 });

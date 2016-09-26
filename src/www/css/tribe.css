@@ -22,7 +22,7 @@
 	font-weight: bold;
 }
 
-/* items */
+/* members */
 
 h1 {
 	padding-left: 35px;
@@ -56,14 +56,14 @@ i {
 }
 
 @media (min-width: 640px) {
-	.items-nav {
+	.members-nav {
 		width: 20%;
 	}
 
-	.items-list {
+	.members-list {
 		width: 80%;
 	}
-	.items-nav.ng-hide {
+	.members-nav.ng-hide {
 		display: block !important;
 	}
 	.nav-mobile-menu,
@@ -110,25 +110,25 @@ i {
     font-size: 20px;
 }
 
-.items-list h2 {
+.members-list h2 {
 	font-size: 14px;
 }
 
-.items-list .item {
+.members-list .member {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	text-align: center;
 }
 
-.items-list .item:hover {
+.members-list .member:hover {
 	box-shadow: 0 0 2px 0px lightgray;
 }
-.items {
+.members {
 	float: left;
     width: 100%;
 }
 
-.item-actions {
+.member-actions {
 	position: absolute;
 	top: -5px;
 	left: -5px;
@@ -139,12 +139,12 @@ i {
 	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
 	box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
 }
-.item:hover .item-actions {
+.member:hover .member-actions {
 	display: block;
 }
 
-.item-action,
-a.item-action {
+.member-action,
+a.member-action {
 	opacity: 0.5;
 	padding: 6px;
 	margin-left: 2px;
@@ -155,30 +155,30 @@ a.item-action {
 	text-decoration: none;
 }
 
-.item-action:hover,
-a.item-action:hover {
+.member-action:hover,
+a.member-action:hover {
 	opacity: 1;
 	text-decoration: none;
 	border: 1px solid #2e6da4;
 	border-radius: 4px;
 }
 
-.item-action-danger,
-a.item-action-danger,
-.item-action-danger:hover,
-a.item-action-danger:hover {
+.member-action-danger,
+a.member-action-danger,
+.member-action-danger:hover,
+a.member-action-danger:hover {
 	color: red;
 	
 }
-.item-action-danger:hover,
-a.item-action-danger:hover {
+.member-action-danger:hover,
+a.member-action-danger:hover {
 	border: 1px solid red;
 }
 
-.item:hover .item-action-drag {
+.member:hover .member-action-drag {
 	cursor: move;
 }
-.item:hover .item-action-drag:hover {
+.member:hover .member-action-drag:hover {
 	border: 1px solid transparent;
 }
 
@@ -218,7 +218,7 @@ a.item-action-danger:hover {
 
 /* view */
 
-.item-poster {
+.member-poster {
 	min-width: 100px;
 	min-height: 100px;
 	max-width: 100px;
@@ -229,7 +229,7 @@ a.item-action-danger:hover {
 	margin-bottom: 15px;
 }
 
-.item-entries {
+.member-entries {
 	list-style: none;
 	float: left;
 	width: 100%;
@@ -237,20 +237,20 @@ a.item-action-danger:hover {
 	padding: 0px;
 }
 
-.item-entry {
+.member-entry {
 	float: left;
 	width: 100%;
 	display: block;
 }
 
-.item-key {
+.member-key {
 	float: left;
 	display: block;
 	color: gray;
 	width: 80px;
 	margin-right: 20px;
 }
-.item-value {
+.member-value {
 	float: left;
 }
 
@@ -262,7 +262,7 @@ md-autocomplete,
 	margin-bottom: 10px;
 }
 
-.edit .item-key {
+.edit .member-key {
 	line-height: 40px;
 }
 
@@ -271,7 +271,7 @@ md-autocomplete,
 }
 
 .input-text,
-.edit .item-value,
+.edit .member-value,
 md-autocomplete,
 md-autocomplete-wrap,
 md-autocomplete input {
@@ -280,7 +280,7 @@ md-autocomplete input {
 	display: block;
 }
 
-.edit .item-key {
+.edit .member-key {
 	float: left;
 	width: 50%;
 	display: block;
@@ -292,11 +292,11 @@ md-autocomplete input {
 		min-width: 190px;
 		width: auto;
 	}
-	.edit .item-key {
+	.edit .member-key {
 		min-width: 220px; 
 	}
-	.edit .item-key,
-	.edit .item-value,
+	.edit .member-key,
+	.edit .member-value,
 	md-autocomplete {
 		width: auto;
 	}
@@ -307,7 +307,7 @@ md-autocomplete input {
 	md-autocomplete-wrap {
 		width: 220px;
 	}
-	.item-key {
+	.member-key {
 		text-align: right;
 	}
 }
@@ -361,7 +361,7 @@ md-virtual-repeat-container .selected {
 	padding: 0px;
 }
 
-.edit .item-street {
+.edit .member-street {
 	width: 100%;
 }
 

@@ -2,33 +2,65 @@ var application = angular.module("tribeApplication", [ "ngRoute", "ngMaterial", 
 
 application.constant("types", [ 'work', 'home' ]);
 
+application.constant("googleMap", false);
+
+application.filter("tokens", function($filter, $location, $window) {
+	return function(list, search) {
+		var results = list;
+		if (search != undefined && search != null && !!(""+search).replace(/\s+/g, "")) {
+			$location.search("search", search);
+			var tokens = Tribe.unique(Tribe.select(search.split(" "), function(token, tokenIndex) {
+				return !!token;
+			}));
+			for (var i = 0; i < tokens.length; i++) {
+				var token = tokens[i];
+				results = $filter("filter")(results, token, "$"); // case insensitive 
+			}
+			
+		} 
+		return results;
+	};
+});
+
+application.directive("tribeScrollTop", function() {
+	return {
+		link: function($scope, $element) {
+			$element.on('click', function() {
+				angular.element("html,body").animate({
+					scrollTop: 0
+				}, "slow");
+			});
+		}
+	}
+});
+
 application.config(function($routeProvider) {
 	$routeProvider
-		.when("/items", {
-			templateUrl: "/templates/items.html",
-			controller: "ItemsController",
+		.when("/view", {
+			templateUrl: "/templates/mainView.html",
+			controller: "MainViewController",
 			reloadOnSearch: false
 		})
-		.when("/group/:id", {
-			templateUrl: "/templates/items.html",
-			controller: "ItemsController",
+		.when("/view/group/:id", {
+			templateUrl: "/templates/mainView.html",
+			controller: "MainViewController",
 			reloadOnSearch: false
 		})
-		.when("/add/item", {
-			templateUrl: "/templates/add.html",
-			controller: "AddController",
+		.when("/view/member/:id", {
+			templateUrl: "/templates/viewMember.html",
+			controller: "ViewMemberController"
 		})
-		.when("/add/item/group/:id", {
-			templateUrl: "/templates/add.html",
-			controller: "AddController",
+		.when("/edit/member/:id", {
+			templateUrl: "/templates/editMember.html",
+			controller: "EditMemberController"
 		})
-		.when("/view/:id", {
-			templateUrl: "/templates/view.html",
-			controller: "ViewController"
+		.when("/add/member", {
+			templateUrl: "/templates/addMember.html",
+			controller: "AddMemberController",
 		})
-		.when("/edit/:id", {
-			templateUrl: "/templates/edit.html",
-			controller: "EditController"
+		.when("/add/member/group/:id", {
+			templateUrl: "/templates/addMember.html",
+			controller: "AddMemberController",
 		})
 		.when("/edit/group/:id", {
 			templateUrl: "/templates/editGroup.html",
@@ -39,9 +71,10 @@ application.config(function($routeProvider) {
 			controller: "AddGroupController"
 		})
 		.otherwise({
-			redirectTo: "/items"
+			redirectTo: "/view"
 		});
 });
+
 
 application.config(function($mdThemingProvider) {
 	$mdThemingProvider.disableTheming();
@@ -61,7 +94,7 @@ application.config(function($mdDateLocaleProvider) {
 application.controller("tribeController", function($scope, $http, $location, $window, $log) {
 	$scope.database = {};
 	$scope.groups = [];
-	$scope.items = [];
+	$scope.members = [];
 	$scope.error = null;
 	$http.get("/data/database.json")
 		.success(function(response) {
@@ -69,7 +102,7 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 			if (response) {
 				$log.debug("loaded", response);
 				$scope.database = response || {};
-				$scope.items = response.items || [];
+				$scope.members = response.members || [];
 				$scope.groups = response.groups || [];
 			}
 		})
@@ -80,8 +113,8 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 	$scope.goBack = function() {
 		$window.history.back();
 	};
-	$scope.getItemById = function(id) {
-		return Tribe.detect($scope.items, function(each, index) {
+	$scope.getMemberById = function(id) {
+		return Tribe.detect($scope.members, function(each, index) {
 			return id === each.id || id === "" + each.id;
 		});
 	};
@@ -90,28 +123,25 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 			return id === each.id || id === "" + each.id;
 		});
 	};
-	$scope.getNextId = function() {
-		var lastItem = $scope.items[$scope.items.length-1] || {};
-		return (lastItem.id || 0) + 1;
+	$scope.getNextMemberId = function() {
+		var lastMember = $scope.members[$scope.members.length-1] || {};
+		return (lastMember.id || 0) + 1;
 	};
 	$scope.getNextGroupId = function() {
 		var lastGroup = $scope.groups[$scope.groups.length-1] || {};
 		return (lastGroup.id || 0) + 1;
 	};
-	$scope.editItemUrl = function(item) {
-		return "/edit/" + item.id;
+	$scope.editMemberUrl = function(member) {
+		return "/edit/member/" + member.id;
 	};
-	$scope.removeItemUrl = function(item) {
-		return "/remove/" + item.id;
+	$scope.viewMemberUrl = function(member) {
+		return "/view/member/" + member.id;
 	};
-	$scope.viewItemUrl = function(item) {
-		return "/view/" + item.id;
+	$scope.addMemberUrl = function(group) {
+		return group ? "/add/member/group/" + group.id : "/add/member";
 	};
-	$scope.addItemUrl = function(group) {
-		return group ? "/add/item/group/" + group.id : "/add/item";
-	};
-	$scope.viewItemsUrl = function() {
-		return "/items";
+	$scope.mainViewUrl = function() {
+		return "/view";
 	};
 	$scope.addGroupUrl = function() {
 		return "/add/group";
@@ -119,13 +149,13 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 	$scope.editGroupUrl = function(group) {
 		return group ? "/edit/group/" + group.id : "";
 	};
-	$scope.groupUrl = function(id) {
-		return "/group/" + id;
+	$scope.viewGroupUrl = function(group) {
+		return group ? "/view/group/" + group.id : "";
 	};
-	$scope.getGroups = function(item) {
+	$scope.getGroups = function(member) {
 		var groups = [];
 		angular.forEach($scope.database.groups, function(each, index) {
-			if (Tribe.includes(item.groups, each.id)) {
+			if (Tribe.includes(member.groups, each.id)) {
 				groups.push(each);
 			}
 		});
