@@ -25,25 +25,40 @@
 /* members */
 
 h1 {
-	padding-left: 35px;
+	padding: 10px 15px 10px 50px;
+	margin: 0px;
+	background-color: black;
+	color: lightgray;
 }
 
 hr {
 	width: 100%;
+	border-color: gray;
 }
 
 i {
 	margin-right: 4px;
 }
 
+.nav-mobile {
+	padding: 0px 15px 0px 15px;
+	float: left;
+	background-color: black;
+	color: lightgray;
+	width: 100%;
+}
+.nav-mobile input {
+	background-color: lightgray;
+	color: black;
+}
 .nav-mobile-menu {
 	position: absolute;
 	top: 0;
 	left: 0;
 	font-size: 20px;
-	margin-top: 20px;
-	margin-bottom: 10px;
-	padding: 0px 15px 0px 15px;
+	padding: 10px 15px 10px 15px;
+	background-color: black;
+	color: lightgray;
 }
 
 .nav-mobile-menu label {
@@ -56,6 +71,17 @@ i {
 }
 
 @media (min-width: 640px) {
+	h1 {
+		padding: 15px;
+	}
+	h1,
+	.nav-mobile {
+		background-color: white;
+		color: black;	
+	}
+	.nav-mobile input {
+		background-color: white;
+	}
 	.members-nav {
 		width: 20%;
 	}
@@ -69,9 +95,6 @@ i {
 	.nav-mobile-menu,
 	.nav-mobile-scroll {
 		display: none;
-	}
-	h1 {
-		padding-left: 0px;
 	}
 	.float-right {
 		float: right;
@@ -110,6 +133,9 @@ i {
     font-size: 20px;
 }
 
+.members-list {
+	margin-top: 15px;
+}
 .members-list h2 {
 	font-size: 14px;
 }
@@ -160,7 +186,7 @@ a.member-action:hover {
 	opacity: 1;
 	text-decoration: none;
 	border: 1px solid #2e6da4;
-	border-radius: 4px;
+	border-radius: 20px;
 }
 
 .member-action-danger,
@@ -182,6 +208,65 @@ a.member-action-danger:hover {
 	border: 1px solid transparent;
 }
 
+/* image / upload */
+
+.member-upload {
+	position: relative;
+	display: block;
+	float: left;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+.member-upload-errors {
+	float: left;
+	display: block;
+	width: 100%;
+	margin-top: 15px;
+	color: orange;
+}
+
+.member-poster {
+	min-width: 200px;
+	min-height: 200px;
+	max-width: 200px;
+	display: block;
+	float:left;
+}
+
+.member-upload:hover .member-action-upload {
+	display: block;
+}
+
+.member-action-upload {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	font-size: 50px;
+	transform: translate(-50%, -50%);
+	border: 8px dotted gray;
+	border-radius: 30px;
+	padding: 50px;
+}
+
+.uploading:hover .member-action-upload {
+	display: none;
+}
+.uploading .member-poster,
+.member-upload:hover .member-poster {
+	opacity: 0.1;
+}
+
+.member-upload-progress {
+	width: 50%;
+	position: absolute;
+	left: 50%;
+	bottom: 20%;
+	display: block;
+	transform: translate(-50%, 0%);
+}
 
 .container-ratio {
 	position: relative;
@@ -217,17 +302,6 @@ a.member-action-danger:hover {
 }
 
 /* view */
-
-.member-poster {
-	min-width: 100px;
-	min-height: 100px;
-	max-width: 100px;
-	max-height: 100%;
-	display: block;
-	float:left;
-	margin-right: 15px;
-	margin-bottom: 15px;
-}
 
 .member-entries {
 	list-style: none;
@@ -314,16 +388,21 @@ md-autocomplete input {
 
 .area-text {
 	width: 100%;
+	min-height: 4em;
 	resize: none;
 }
 
 .input-text,
 .area-text,
 .md-datepicker-input {
-	line-height: 40px;
 	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 	border: none;
 	padding: 0px 15px
+}
+
+.input-text,
+.md-datepicker-input {
+	line-height: 40px;
 }
 
 .md-datepicker-input-container {
@@ -375,4 +454,11 @@ form input.ng-invalid {
 .google-map {
 	width: 500px;
 	height: 100px;
+}
+
+.fileupload {
+	width: 100px;
+	height: 100px;
+	display: block;
+	background-color: red;
 }

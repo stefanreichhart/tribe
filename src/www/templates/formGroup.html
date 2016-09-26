@@ -6,9 +6,9 @@
 	</h2>
 
 	<div class="row-fluid controls" >
-		<a href="" ng-click="goBack()" class="btn btn-default" ng-show="form.$pristine">{{textBack}}</a>
-		<a href="" ng-click="cancelMemberConfirmed($event)" class="btn btn-danger" ng-show="form.$dirty">{{textCancel}}</a>
-		<input type="submit" class="btn btn-primary" value="{{textSave}}" ng-disabled="form.$invalid || form.$error.$required"/>
+		<a href="" ng-click="goBack()" class="btn btn-default" ng-show="form.$pristine"><i class="glyphicon glyphicon-arrow-left"></i>Back</a>
+		<a href="" ng-click="cancelGroupConfirmed($event)" class="btn btn-danger" ng-show="form.$dirty">Cancel &amp; Back</a>
+		<input type="submit" class="btn btn-primary" value="Save & Back" ng-disabled="form.$invalid || form.$error.$required"/>
 	</div>
 
 </form>

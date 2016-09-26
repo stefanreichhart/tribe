@@ -2,7 +2,7 @@
 	"members": [ 
 		{
 			"id": 0,
-			"poster": "/data/0.png",
+			"poster": "0.png",
 			"firstname": "Justo",
 			"lastname": "Tristique",
 			"position": "Nullam",
@@ -50,7 +50,7 @@
 		}, 
 		{
 			"id": 1,
-			"poster": "/data/1.png",
+			"poster": "1.png",
 			"firstname": "Amet",
 			"lastname": "Vulputate",
 			"position": "Mollis",
@@ -85,7 +85,7 @@
 		},
 		{
 			"id": 2,
-			"poster": "/data/2.png",
+			"poster": "2.png",
 			"firstname": "Condimentum",
 			"lastname": "Elit",
 			"position": "Bibendum Quam",
@@ -125,7 +125,7 @@
 		}, 
 		{
 			"id": 3,
-			"poster": "/data/3.png",
+			"poster": "3.png",
 			"firstname": "Sollicitudin",
 			"lastname": "Amet",
 			"position": "Bibendum Quam",
@@ -164,7 +164,7 @@
 		}, 
 		{
 			"id": 4,
-			"poster": "/data/4.png",
+			"poster": "4.png",
 			"firstname": "Justo",
 			"lastname": "Tellus",
 			"position": "Bibendum Quam",
@@ -203,7 +203,7 @@
 		}, 
 		{
 			"id": 5,
-			"poster": "/data/5.png",
+			"poster": "5.png",
 			"firstname": "Malesuada",
 			"lastname": "Sem",
 			"position": "Amet",
@@ -231,7 +231,7 @@
 		},
 		{
 			"id": 6,
-			"poster": "/data/6.png",
+			"poster": "6.png",
 			"firstname": "Consectetur",
 			"lastname": "Adipiscing",
 			"position": "Pharetra",
@@ -258,7 +258,7 @@
 		},
 		{
 			"id": 7,
-			"poster": "/data/7.png",
+			"poster": "7.png",
 			"firstname": "Porta",
 			"lastname": "Pharetra",
 			"position": "Risus Tristique Sollicitudin",
@@ -285,7 +285,7 @@
 		},
 		{
 			"id": 8,
-			"poster": "/data/8.png",
+			"poster": "8.png",
 			"firstname": "Justo",
 			"lastname": "Commodo",
 			"position": "Risus Tristique Sollicitudin",
@@ -312,7 +312,7 @@
 		},
 		{
 			"id": 9,
-			"poster": "/data/9.png",
+			"poster": "9.png",
 			"firstname": "Nibh",
 			"lastname": "Lorem",
 			"position": "Bibendum Quam",
@@ -351,7 +351,7 @@
 		}, 
 		{
 			"id": 10,
-			"poster": "/data/10.png",
+			"poster": "10.png",
 			"firstname": "Etiam",
 			"lastname": "Purus",
 			"position": "Bibendum Quam",

@@ -1,4 +1,4 @@
-var application = angular.module("tribeApplication", [ "ngRoute", "ngMaterial", "ngMessages", "ngSanitize", "ngDragDrop" ]);
+var application = angular.module("tribeApplication", [ "ngRoute", "ngMaterial", "ngMessages", "ngSanitize", "ngDragDrop", "angularFileUpload" ]);
 
 application.constant("types", [ 'work', 'home' ]);
 

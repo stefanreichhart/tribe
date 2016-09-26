@@ -5,14 +5,14 @@ application.controller("EditMemberController", function($scope, $routeParams, $l
 		if ($scope.addableGroup != null) {
 			$scope.addGroup($scope.member.groups, $scope.addableGroup);
 		}
-		$scope.originalMember = angular.extend($scope.originalMember, $scope.member);
-		$scope.member = angular.extend({}, $scope.originalMember);
+		$scope.originalMember = angular.merge($scope.originalMember, $scope.member);
+		$scope.member = angular.merge({}, $scope.originalMember);
 		$scope.goBack();
 	};
 	$scope.originalMember = $scope.getMemberById($routeParams.id);
 	if (!$scope.originalMember) {
-		$log.debug("Members not found", $routeParams.id);
+		$log.debug("Member not found", $routeParams.id);
 		$location.url($scope.viewMemberUrl($scope.member));
 	}
-	$scope.member = angular.extend({}, $scope.originalMember);
+	$scope.member = angular.merge({}, $scope.originalMember);
 });

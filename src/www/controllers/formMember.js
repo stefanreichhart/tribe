@@ -1,13 +1,9 @@
 var application = angular.module("tribeApplication");
 
 application.controller("FormMemberController", function($scope, $routeParams, $location, $mdDateLocale, $mdDialog, $log) {
-	$scope.textBack = "Back";
-	$scope.textCancel = "Cancel & Back";
-	$scope.textSave = "Save & Back";
 	$scope.today = function() {
 		return $mdDateLocale.formatDate(new Date());
 	};
-
 	$scope.newEmptyPhoneNumber = function() { 
 		return {
 			"private": null 
@@ -63,7 +59,6 @@ application.controller("FormMemberController", function($scope, $routeParams, $l
 		}
 	};
 	$scope.cancelMemberConfirmed = function(event) {
-		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm()
 			.title("Discard changes?")
 			.htmlContent("Are you sure you want to discard all changes made to the member " + $scope.member.firstname + " " + $scope.member.lastname + "? <br />This action cannot be undone.")

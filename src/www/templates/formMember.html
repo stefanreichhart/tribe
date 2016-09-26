@@ -1,14 +1,23 @@
 <form name="form" ng-controller="FormMemberController" ng-submit="form.$valid && submit()" ng-cloak class="edit">
 	
-	<h2 class="row-fluid" >
-		<img class="member-poster" ng-src="{{member.poster}}">
-		<label for="member.firstname" class="hidden">Firstname</label>
-		<input name="member.firstname" type="text" class="input-text" ng-model="member.firstname" placeholder="Firstname" title="Fistname" required />
-		<label for="member.lastname" class="hidden">Lastname</label>
-		<input name="member.lastname" type="text" class="input-text nofloat" ng-model="member.lastname" placeholder="Lastname" title="Lastname" required />
-		<label for="member.position" class="hidden">Position</label>
-		<input name="member.position" type="text" class="input-text" ng-model="member.position" placeholder="Position" title="Position" required />
-	</h2>
+	<div class="row-fluid" nv-file-drop uploader="uploader" ng-controller="UploadMemberPosterController">
+		<div class="member-upload" ng-class="{ uploading: progress && progress > 0 && progress < 100}">
+			<i class="glyphicon glyphicon-cloud-upload member-action-upload"></i>
+			<progress value="{{progress}}" max="100" class="member-upload-progress" ng-show="progress && progress > 0"></progress>
+			<img class="member-poster" ng-src="/data/uploads/{{member.poster}}">
+		</div>
+		<h2>	
+			<label for="member.firstname" class="hidden">Firstname</label>
+			<input name="member.firstname" type="text" class="input-text" ng-model="member.firstname" placeholder="Firstname" title="Fistname" required />
+			<label for="member.lastname" class="hidden">Lastname</label>
+			<input name="member.lastname" type="text" class="input-text nofloat" ng-model="member.lastname" placeholder="Lastname" title="Lastname" required />
+			<label for="member.position" class="hidden">Position</label>
+			<input name="member.position" type="text" class="input-text" ng-model="member.position" placeholder="Position" title="Position" required />
+		</h2>
+		<ul class="member-upload-errors">
+			<li ng-repeat="error in errors"  class="member-upload-error">{{error}}</li>
+		</ul>
+	</div>
 
 	<div class="row-fluid" >
 		<h3>Addresses</h3>
@@ -19,7 +28,7 @@
 					<address class="member-value">
 						<div>
 							<label for="street" class="hidden">Street</label>
-							<input name="street" type="text" class="input-text member-street" ng-model="each.street" placeholder="Street" required />
+							<input name="street" type="text" class="input-text member-street" ng-model="each.street" placeholder="Street" title="Street" required />
 						</div>
 						<div>
 								<label for="zip" class="hidden">Zip</label>
@@ -53,7 +62,7 @@
 							</div>
 						</div>
 					</address>
-					<a href="" ng-click="removeListEntry(member.addresses, each)" class="member-action member-action-danger glyphicon glyphicon-trash" title="Remove address"><span class="hidden">Remove address</span></a>
+					<a href="" ng-click="removeListEntry(member.addresses, each)" class="member-action member-action-danger glyphicon glyphicon-minus" title="Remove address"><span class="hidden">Remove address</span></a>
 					<a href="" ng-if="$last" ng-click="addListEntry(member.addresses, emptyAddress())" class="glyphicon glyphicon-plus member-action" title="Add address"><span class="hidden">Add address</span></a>
 				</ng-form>
 			</li>
@@ -67,8 +76,8 @@
 			<li ng-repeat="each in member.phonenumbers" class="member-entry">
 				<div class="member-key" ng-include="'/templates/formType.html'" ng-controller="FormTypeController" ></div>
 				<label for="phonenumber.phone" class="hidden">Number</label>
-				<input name="phonenumber.phone" type="tel" ng-model="each.phone" class="input-text" placeholder="Phone number" required/>
-				<a href="" ng-click="removeListEntry(member.phonenumbers, each)" class="member-action member-action-danger glyphicon glyphicon-trash" title="Remove phone number"><span class="hidden">Remove phone number</span></a>
+				<input name="phonenumber.phone" type="tel" ng-model="each.phone" class="input-text" placeholder="Phone number" title="Phone number" required/>
+				<a href="" ng-click="removeListEntry(member.phonenumbers, each)" class="member-action member-action-danger glyphicon glyphicon-minus" title="Remove phone number"><span class="hidden">Remove phone number</span></a>
 				<a href="" ng-if="$last" ng-click="addListEntry(member.phonenumbers, emptyPhoneNumber())" class="glyphicon glyphicon-plus member-action" title="Add phone number"><span class="hidden">Add phone number</span></a>
 			</li>
 		</ul>
@@ -80,8 +89,8 @@
 			<li ng-repeat="each in member.emails" class="member-entry">
 				<div class="member-key" ng-include="'/templates/formType.html'" ng-controller="FormTypeController" ></div>
 				<label for="email.email" class="hidden">E-Mail</label>
-				<input name="email.email" type="email" ng-model="each.email" class="input-text" placeholder="E-mail address" required/>
-				<a href="" ng-click="removeListEntry(member.emails, each)" class="member-action member-action-danger glyphicon glyphicon-trash" title="Remove E-mail address"><span class="hidden">Remove E-mail address</span></a>
+				<input name="email.email" type="email" ng-model="each.email" class="input-text" placeholder="E-mail address" title="E-mail address" required/>
+				<a href="" ng-click="removeListEntry(member.emails, each)" class="member-action member-action-danger glyphicon glyphicon-minus" title="Remove E-mail address"><span class="hidden">Remove E-mail address</span></a>
 				<a href="" ng-if="$last" ng-click="addListEntry(member.emails, emptyEmail())" class="glyphicon glyphicon-plus member-action" title="Add E-mail address"><span class="hidden">Add E-mail address</span></a>
 			</li>
 		</ul>
@@ -100,7 +109,7 @@
 
 	<div class="row-fluid" >
 		<label for="member.description"><h3>Description</h3></label>
-		<textarea name="member.description" type="text" class="area-text" ng-model="member.description" placeholder="Description"/>
+		<textarea name="member.description" type="text" class="area-text" ng-model="member.description" placeholder="Description" title="Description"/>
 	</div>
 
 	<div class="row-fluid" >
@@ -108,7 +117,7 @@
 		<ul class="member-entries">
 			<li ng-repeat="group in getGroups(member)" class="member-entry">
 				<span>{{group.name}}</span>
-				<a href="" ng-click="removeGroup(member.groups, group)" class="member-action member-action-danger glyphicon glyphicon-trash" title="Remove from group"><span class="hidden">Remove from group</span></a>
+				<a href="" ng-click="removeGroup(member.groups, group)" class="member-action member-action-danger glyphicon glyphicon-minus" title="Remove from group"><span class="hidden">Remove from group</span></a>
 			</li>
 			<li class="member-entry">
 				<md-autocomplete md-selected-item="addableGroup" md-item-text="group.name" md-search-text="searchText" md-items="group in getAddableGroups(member.groups) | filter:{$:searchText}:false" md-item-text="group.name" md-require-match="false" md-no-cache="true" md-autoselect="true" md-min-length="0" placeholder="Add to group">
@@ -120,10 +129,11 @@
 	</div>
 
 	<div class="row-fluid controls" >
-		<a href="" ng-click="goBack()" class="btn btn-default" ng-show="form.$pristine">{{textBack}}</a>
-		<a href="" ng-click="cancelMemberConfirmed($event)" class="btn btn-danger" ng-show="form.$dirty">{{textCancel}}</a>
-		<input type="submit" class="btn btn-primary" value="{{textSave}}" ng-disabled="form.$invalid || form.$error.$required"/>
+		<a href="" ng-click="goBack()" class="btn btn-default" ng-show="form.$pristine"><i class="glyphicon glyphicon-arrow-left"></i>Back</a>
+		<a href="" ng-click="cancelMemberConfirmed($event)" class="btn btn-danger" ng-show="form.$dirty">Cancel &amp; Back</a>
+		<input type="submit" class="btn btn-primary" value="Save & Back" ng-disabled="form.$invalid || form.$error.$required"/>
 	</div>
+
 </form>
 
 <script async defer ng-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7a5yoZSk2DHwukVlykFQUHFy1jTKGm7s&callback=Tribe.initGoogleMaps" ng-if="googleMap"></script>

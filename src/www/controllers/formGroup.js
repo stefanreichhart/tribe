@@ -1,11 +1,7 @@
 var application = angular.module("tribeApplication");
 
 application.controller("FormGroupController", function($scope, $routeParams, $location, $mdDialog, $log) {
-	$scope.textBack = "Back";
-	$scope.textCancel = "Cancel & Back";
-	$scope.textSave = "Save & Back";
-	$scope.cancelMemberConfirmed = function(event) {
-		// Appending dialog to document.body to cover sidenav in docs app
+	$scope.cancelGroupConfirmed = function(event) {
 		var confirm = $mdDialog.confirm()
 			.title("Discard changes?")
 			.htmlContent("Are you sure you want to discard all changes made to the group " + $scope.group.name + "? <br />This action cannot be undone.")

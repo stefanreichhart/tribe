@@ -3,7 +3,7 @@
 	<label for="nav-mobile-toggle" class="glyphicon glyphicon-menu-hamburger"><span class="hidden">Menu</span></label>
 </nav>
 
-<nav class="row-fluid members-nav" ng-show="toggle">
+<nav class="row-fluid members-nav nav-mobile" ng-show="toggle">
 	<div>
 		<label for="searchText"><h4>Filter / Suche</h4></label>
 		<form>
@@ -46,40 +46,42 @@
 	</div>
 </nav>
 
-<div class="row-fluid members-list">	
-	<p class="border-bottom">
-		<ng-pluralize count="filteredGroupMembers.length" when="{ 0: 'No members available for display', 1: '1 member displayed', 'other': '{{filteredGroupMembers.length}} / {{selectedGroupMembers.length}} members displayed' }"></ng-pluralize>
-	</p>
-	<hr>
-	<ul ng-show="filteredGroupMembers.length" class="members list-unstyled">
-		<li ng-repeat="member in filteredGroupMembers = (selectedGroupMembers | tokens:searchText)" class="member col-md-2 col-sm-3 col-xs-6" data-jqyoui-options="{revert: 'invalid', helper: 'clone', handle: '.member-action-drag', opacity: 0.6}" jqyoui-draggable="{animate: true, placeholder: 'keep', onStart:'onDragStart(member)', helper: 'clone'}" data-drag="true">
-			<a href="#{{viewMemberUrl(member)}}">
-				<div class="container-ratio">
-					<div class="content-ratio">
-						<img ng-src="{{member.poster}}">
-						<div class="member-actions">
-							<div class="glyphicon glyphicon-fullscreen member-action member-action-drag">
-								<span class="hidden">Add member to group by drag &amp; drop</span>
+<div class="container-fluid">
+	<div class="row-fluid members-list">	
+		<p class="border-bottom">
+			<ng-pluralize count="filteredGroupMembers.length" when="{ 0: 'No members available for display', 1: '1 member displayed', 'other': '{{filteredGroupMembers.length}} / {{selectedGroupMembers.length}} members displayed' }"></ng-pluralize>
+		</p>
+		<hr>
+		<ul ng-show="filteredGroupMembers.length" class="members list-unstyled">
+			<li ng-repeat="member in filteredGroupMembers = (selectedGroupMembers | tokens:searchText)" class="member col-md-2 col-sm-3 col-xs-6" data-jqyoui-options="{revert: 'invalid', helper: 'clone', handle: '.member-action-drag', opacity: 0.6}" jqyoui-draggable="{animate: true, placeholder: 'keep', onStart:'onDragStart(member)', helper: 'clone'}" data-drag="true">
+				<a href="#{{viewMemberUrl(member)}}">
+					<div class="container-ratio">
+						<div class="content-ratio">
+							<img ng-src="/data/uploads/{{member.poster}}">
+							<div class="member-actions">
+								<div class="glyphicon glyphicon-fullscreen member-action member-action-drag">
+									<span class="hidden">Add member to group by drag &amp; drop</span>
+								</div>
+								<a href="#{{editMemberUrl(member)}}" class="glyphicon glyphicon-pencil member-action member-edit" title="Edit member">
+									<span class="hidden">Edit member</span>
+								</a>
+								<a href="" ng-click="removeMemberFromGroup(member, selectedGroup, $event)" class="glyphicon glyphicon-minus member-action member-action-danger" ng-if="selectedGroup != undefined" title="Remove member from group">
+									<span class="hidden">Remove member from group</span>
+								</a>
+								<a href="" ng-click="removeMemberConfirmed(member, $event)" class="glyphicon glyphicon-trash member-action member-action-danger"  title="Remove member">
+									<span class="hidden">Remove member</span>
+								</a>
 							</div>
-							<a href="#{{editMemberUrl(member)}}" class="glyphicon glyphicon-pencil member-action member-edit" title="Edit member">
-								<span class="hidden">Edit member</span>
-							</a>
-							<a href="" ng-click="removeMemberFromGroup(member, selectedGroup, $event)" class="glyphicon glyphicon-minus member-action member-action-danger" ng-if="selectedGroup != undefined" title="Remove member from group">
-								<span class="hidden">Remove member from group</span>
-							</a>
-							<a href="" ng-click="removeMemberConfirmed(member, $event)" class="glyphicon glyphicon-trash member-action member-action-danger"  title="Remove member">
-								<span class="hidden">Remove member</span>
-							</a>
 						</div>
 					</div>
-				</div>
-				<h2>
-					<span class="member-firstname">{{member.firstname}}</span>
-					<span class="member-lastname">{{member.lastname}}</span>
-				</h2>
-			</a>
-		</li>
-	</ul>
+					<h2>
+						<span class="member-firstname">{{member.firstname}}</span>
+						<span class="member-lastname">{{member.lastname}}</span>
+					</h2>
+				</a>
+			</li>
+		</ul>
+	</div>
 </div>
 
 <nav class="nav-mobile-scroll" tribe-Scroll-Top>

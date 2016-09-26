@@ -5,8 +5,8 @@ application.controller('AddMemberController', function($scope, $routeParams, $lo
 		if ($scope.addableGroup != null) {
 			$scope.addGroup($scope.member.groups, $scope.addableGroup);
 		}
-		$scope.originalMember = angular.extend($scope.originalMember, $scope.member);
-		$scope.member = angular.extend({}, $scope.originalMember);
+		$scope.originalMember = angular.merge($scope.originalMember, $scope.member);
+		$scope.member = angular.merge({}, $scope.originalMember);
 		$scope.member.id = $scope.getNextMemberId();
 		$scope.members.push($scope.member);
 		$scope.goBack();
@@ -45,5 +45,5 @@ application.controller('AddMemberController', function($scope, $routeParams, $lo
 		}
 	};
 	$scope.originalMember = $scope.newEmptyMember();
-	$scope.member = angular.extend({}, $scope.originalMember);
+	$scope.member = angular.merge({}, $scope.originalMember);
 });
