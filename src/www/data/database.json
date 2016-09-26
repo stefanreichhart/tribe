@@ -37,7 +37,7 @@
 			"emails": [
 				{
 					"type": "private",  
-					"number": "Justo.Tristique@Euismod.com"
+					"email": "Justo.Tristique@Euismod.com"
 				},
 				{
 					"type": "work",  
@@ -111,7 +111,7 @@
 			"emails": [
 				{
 					"type": "private",  
-					"number": "Condimentum.Elit@Pharetra.com"
+					"email": "Condimentum.Elit@Pharetra.com"
 				},
 				{
 					"type": "work",  
@@ -151,7 +151,7 @@
 			"emails": [
 				{
 					"type": "private",  
-					"number": "Sollicitudin.Amet@Euismod.com"
+					"email": "Sollicitudin.Amet@Euismod.com"
 				},
 				{
 					"type": "work",  
@@ -190,7 +190,7 @@
 			"emails": [
 				{
 					"type": "private",  
-					"number": "Justo.Tristique@Euismod.com"
+					"email": "Justo.Tristique@Euismod.com"
 				},
 				{
 					"type": "work",  
@@ -221,7 +221,7 @@
 			"emails": [
 				{
 					"type": "work",  
-					"number": "Malesuada.Sem@Euismod.com"
+					"email": "Malesuada.Sem@Euismod.com"
 				}
 			],
 			"description": "Sed posuere consectetur est at lobortis.",
@@ -249,7 +249,7 @@
 			"emails": [
 				{
 					"type": "work",  
-					"number": "Consectetur.Adipiscing@Euismod.com"
+					"email": "Consectetur.Adipiscing@Euismod.com"
 				}
 			],
 			"groups": [
@@ -276,7 +276,7 @@
 			"emails": [
 				{
 					"type": "work",  
-					"number": "Porta.Pharetra@Euismod.com"
+					"email": "Porta.Pharetra@Euismod.com"
 				}
 			],
 			"groups": [
@@ -303,7 +303,7 @@
 			"emails": [
 				{
 					"type": "private",  
-					"number": "Justo.Commodo@Euismod.com"
+					"email": "Justo.Commodo@Euismod.com"
 				}
 			],
 			"groups": [
@@ -367,7 +367,7 @@
 			"emails": [
 				{
 					"type": "private",  
-					"number": "Etiam.Purus@Euismod.com"
+					"email": "Etiam.Purus@Euismod.com"
 				},
 				{
 					"type": "work",  

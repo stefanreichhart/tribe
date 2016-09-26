@@ -30,17 +30,17 @@
 		<ul class="member-entries">
 			<li class="member-entry" ng-repeat="phonenumber in member.phonenumbers" ng-hide="!phonenumber.phone">
 				<span class="member-key">{{phonenumber.type}}</span>
-				<a class="member-value" href="tel:{{phonenumber.phone}}"> {{phonenumber.phone}}</a>
+				<a class="member-value" href="tel:{{phonenumber.phone}}">{{phonenumber.phone}}</a>
 			</li>
 		</ul>
 	</div>
 
-	<div class="row-fluid" ng-hide="!member.emails  || !member.phonenumbers.emails">
+	<div class="row-fluid" ng-hide="!member.emails  || !member.emails.length">
 		<h3>E-mail</h3>
 		<ul class="member-entries">
-			<li class="member-entry" ng-repeat="email in member.emails" ng-hide="!email">
+			<li class="member-entry" ng-repeat="email in member.emails" ng-hide="!email.email">
 				<span class="member-key">{{email.type}}</span>
-				<a class="member-value" href="mailto:{{email.email}}" >{{email.email}}</a>
+				<a class="member-value" href="mailto:{{email.email}}">{{email.email}}</a>
 			</li>
 		</ul>
 	</div>

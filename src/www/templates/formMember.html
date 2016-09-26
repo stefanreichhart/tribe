@@ -130,8 +130,14 @@
 
 	<div class="row-fluid controls" >
 		<a href="" ng-click="goBack()" class="btn btn-default" ng-show="form.$pristine"><i class="glyphicon glyphicon-arrow-left"></i>Back</a>
-		<a href="" ng-click="cancelMemberConfirmed($event)" class="btn btn-danger" ng-show="form.$dirty">Cancel &amp; Back</a>
-		<input type="submit" class="btn btn-primary" value="Save & Back" ng-disabled="form.$invalid || form.$error.$required"/>
+		<a href="" ng-click="cancelMemberConfirmed($event)" class="btn btn-danger" ng-show="form.$dirty">
+			<i class="glyphicon glyphicon-ban-circle"></i>
+			Cancel &amp; Back
+		</a>
+		<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid || form.$error.$required">
+			<i class="glyphicon glyphicon-ok"></i>
+			Save &amp; Back
+		</button>
 	</div>
 
 </form>

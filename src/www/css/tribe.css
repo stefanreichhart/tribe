@@ -1,5 +1,9 @@
 /* primitives */
 
+* {
+	line-height: 28px;
+}
+
 .row-fluid {
 	float: left;
 	width: 100%;
@@ -29,6 +33,9 @@ h1 {
 	margin: 0px;
 	background-color: black;
 	color: lightgray;
+	-webkit-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.5);
+	box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.5);
 }
 
 hr {
@@ -46,6 +53,9 @@ i {
 	background-color: black;
 	color: lightgray;
 	width: 100%;
+	-webkit-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.5);
+	box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.5);
 }
 .nav-mobile input {
 	background-color: lightgray;
@@ -71,6 +81,9 @@ i {
 }
 
 @media (min-width: 640px) {
+	* {
+		line-height: 24px;
+	}
 	h1 {
 		padding: 15px;
 	}
@@ -78,6 +91,9 @@ i {
 	.nav-mobile {
 		background-color: white;
 		color: black;	
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
 	}
 	.nav-mobile input {
 		background-color: white;
@@ -152,6 +168,12 @@ i {
 .members {
 	float: left;
     width: 100%;
+}
+.ellipsis {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .member-actions {
