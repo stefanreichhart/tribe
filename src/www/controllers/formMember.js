@@ -33,7 +33,7 @@ application.controller("FormMemberController", function($scope, $routeParams, $l
 	$scope.getAddableGroups = function(list) {
 		if ($scope.addableGroups == null) {
 			var groups = [];
-			angular.forEach($scope.database.groups, function(each, index) {
+			angular.forEach($scope.groups, function(each, index) {
 				if (!Tribe.includes(list, each.id)) {
 					groups.push(each);
 				}

@@ -92,7 +92,6 @@ application.config(function($mdDateLocaleProvider) {
 });
 
 application.controller("tribeController", function($scope, $http, $location, $window, $log) {
-	$scope.database = {};
 	$scope.groups = [];
 	$scope.members = [];
 	$scope.error = null;
@@ -107,6 +106,22 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 		.error(function(error) {
 			$scope.error = error;
 		});
+	/*
+	$http.get("/api/members")
+		.success(function(response) {
+			$scope.members = response.results;
+		})
+		.error(function(error) {
+			$scope.error = error;
+		});
+	$http.get("/api/groups")
+		.success(function(response) {
+			$scope.groups = response.results;
+		})
+		.error(function(error) {
+			$scope.error = error;
+		});
+	*/
 	$scope.goBack = function() {
 		$window.history.back();
 	};
@@ -151,7 +166,7 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 	};
 	$scope.getGroups = function(member) {
 		var groups = [];
-		angular.forEach($scope.database.groups, function(each, index) {
+		angular.forEach($scope.groups, function(each, index) {
 			if (Tribe.includes(member.groups, each.id)) {
 				groups.push(each);
 			}

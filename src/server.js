@@ -7,8 +7,6 @@ var fileUpload = require('express-fileupload');
 var mongodb = require('mongodb');
 var mongoClient = mongodb.MongoClient;
 
-// todo --> CONFIG
-log.level = process.env.LOG_LEVEL | "debug"; 
 var app = express();
 var www = __dirname + "/www"; // only serve files from this directory !
 var url = 'mongodb://localhost:27017/tribe';
@@ -74,36 +72,47 @@ app.post('/upload/member', function(req, res) {
 });
 
 var connect = function(fnSuccess, fnError) {
-	MongoClient.connect(url, function(err, db) {
-		try {
-			if (!err) {
-				fnSuccess(db);
-			} else {
-				log.error("DB Error", { connection: err });
-				fnError(err, db);
-			}
-			db.close();
-		} catch(error) {
-			log.error("DB Closure", { action: error, connection: err });
-		} finally {
-			if (!err) {
-				db.close();
-			}
-		}
+	mongoClient.connect(url, function(err, db) {
+		if (!err) {
+			fnSuccess(db);
+		} else {
+			console.log(err);
+			log.error("DB Error", { connection: err });
+			fnError(err, db);
+		}		
 	});
 };
 
-// mongo db proxy
-router.get('members', function(req, res) {
+router.get('/members', function(req, res) {
 	connect(
 		function(db) {
-
+			db.collection('members').find({}).toArray(function(err, docs) { 
+				res.json({ results: docs, error: err }); 
+				db.close();
+			});
+			
 		},
 		function(err, db) { 
-			res.json(); 
+			res.json({ results: [], error: err }); 
+			db.close();
 		}
-	)
-	
+	);
 });
+
+router.get('/groups', function(req, res) {
+	connect(
+		function(db) {
+			db.collection('groups').find({}).toArray(function(err, docs) { 
+				res.json({ results: docs, error: err }); 
+				db.close();
+			});
+		},
+		function(err, db) { 
+			res.json({ results: [], error: err }); 
+			db.close();
+		}
+	);
+});
+
 
 app.listen(8888);

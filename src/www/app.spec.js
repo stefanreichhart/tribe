@@ -43,14 +43,13 @@ describe('app.js / DB Mocks', function() {
 		$httpBackend.expectGET('/data/database.json');
 		var controller = $controller('tribeController', { $scope: $rootScope });
 		$httpBackend.flush();
-		expect($rootScope.database).not.toBe(null);
-		expect($rootScope.database).toEqual(emptyDatabase);
-		expect($rootScope.database.members).not.toBe(undefined);
-		expect($rootScope.database.members).not.toBe(null);
-		expect($rootScope.database.members).toEqual([]);
-		expect($rootScope.database.groups).not.toBe(undefined);
-		expect($rootScope.database.groups).not.toBe(null);
-		expect($rootScope.database.groups).toEqual([]);
+		expect($rootScope).toEqual(emptyDatabase);
+		expect($rootScope.members).not.toBe(undefined);
+		expect($rootScope.members).not.toBe(null);
+		expect($rootScope.members).toEqual([]);
+		expect($rootScope.groups).not.toBe(undefined);
+		expect($rootScope.groups).not.toBe(null);
+		expect($rootScope.groups).toEqual([]);
 	});
 
 });
