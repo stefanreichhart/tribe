@@ -98,16 +98,13 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 	$scope.error = null;
 	$http.get("/data/database.json")
 		.success(function(response) {
-			$log.debug(response);
 			if (response) {
-				$log.debug("loaded", response);
 				$scope.database = response || {};
 				$scope.members = response.members || [];
 				$scope.groups = response.groups || [];
 			}
 		})
 		.error(function(error) {
-			$log.debug($scope, error);
 			$scope.error = error;
 		});
 	$scope.goBack = function() {

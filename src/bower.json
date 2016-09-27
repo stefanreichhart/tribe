@@ -25,5 +25,9 @@
     "angular-sanitize": "^1.5.8",
     "angular-dragdrop": "^1.0.13",
     "angular-file-upload": "^2.3.4"
+  },
+  "devDependencies": {
+    "jasmine-core": "jasmine#^2.5.2",
+    "angular-mocks": "^1.5.8"
   }
 }

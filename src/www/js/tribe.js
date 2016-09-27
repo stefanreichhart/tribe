@@ -25,8 +25,8 @@ Tribe = {
 		return results;
 	},
 	reject: function(list, callback) {
-		return Tribe.select(function(each, index) {
-			return !callback(each, index);
+		return Tribe.select(list, function(each, index) {
+			return callback(each, index) === false;
 		});
 	},
 	deepSelect: function(object, select, collect, maxObjects, unique) {
@@ -102,11 +102,11 @@ Tribe = {
 		});
 	},
 	incremented: function(string) {
-		var matches = ("" + string).match(/^(.+\s)(\d+)$/);
-		if (matches && matches.length == 3) {
-			return matches[1] + (Number.parseInt(matches[2]) + 1);
+		var matches = ("" + string).match(/^(.+\s\()(\d+(\.\d+)?)(\))$/);
+		if (matches && matches.length == 5) {
+			return matches[1] + (Number.parseFloat(matches[2]) + 1) + matches[4];
 		} else {
-			return string + " 1";
+			return string + " (1)";
 		}
 	},
 	initGoogleMaps: function() {
