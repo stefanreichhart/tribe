@@ -1,10 +1,16 @@
 var application = angular.module("tribeApplication");
 
-application.controller("UploadMemberPosterController", function($scope, FileUploader, $log) {
+application.controller("UploadMemberPosterController", function($scope, $location, FileUploader, $log) {
 	var extensions = [ ".jpg", ".jpeg", ".png", ".gif" ];
 	var maxSize = 1;
 	var uploader = $scope.uploader = new FileUploader({
-		url: "/upload/member"
+		url: "/upload/member",
+		formData: [ 
+			{ 
+				member: $scope.member.id,
+				path: $location.path() 
+			} 
+		]
 	});
 	$scope.progress = null;
 	$scope.errors = [];
@@ -34,7 +40,6 @@ application.controller("UploadMemberPosterController", function($scope, FileUplo
 	});
 	uploader.onWhenAddingFileFailed = function(item, filter, options) {
 		$scope.errors.push(filter.msg(item));
-		console.info('onWhenAddingFileFailed', item, filter, options);
 	};
 	uploader.onAfterAddingFile = function(fileItem) {
 		$scope.errors = [];
