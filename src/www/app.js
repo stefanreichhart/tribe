@@ -91,48 +91,18 @@ application.config(function($mdDateLocaleProvider) {
     };
 });
 
-application.controller("tribeController", function($scope, $http, $location, $window, $log) {
-	$scope.groups = [];
-	$scope.members = [];
-	$scope.error = null;
-	$http.get("/data/database.json")
-		.success(function(response) {
-			if (response) {
-				$scope.database = response || {};
-				$scope.members = response.members || [];
-				$scope.groups = response.groups || [];
-			}
-		})
-		.error(function(error) {
-			$scope.error = error;
-		});
-	/*
-	$http.get("/api/members")
-		.success(function(response) {
-			$scope.members = response.results;
-		})
-		.error(function(error) {
-			$scope.error = error;
-		});
-	$http.get("/api/groups")
-		.success(function(response) {
-			$scope.groups = response.results;
-		})
-		.error(function(error) {
-			$scope.error = error;
-		});
-	*/
+application.controller("tribeController", function($scope, $http, $location, $window, $routeParams, $log) {
 	$scope.goBack = function() {
 		$window.history.back();
 	};
 	$scope.getMemberById = function(id) {
 		return Tribe.detect($scope.members, function(each, index) {
-			return id === each.id || id === "" + each.id;
+			return id === each._id || id === "" + each._id;
 		});
 	};
 	$scope.getGroupById = function(id) {
 		return Tribe.detect($scope.groups, function(each, index) {
-			return id === each.id || id === "" + each.id;
+			return id === each._id || id === "" + each._id;
 		});
 	};
 	$scope.getNextMemberId = function() {
@@ -144,13 +114,13 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 		return (lastGroup.id || 0) + 1;
 	};
 	$scope.editMemberUrl = function(member) {
-		return "/edit/member/" + member.id;
+		return "/edit/member/" + member._id;
 	};
 	$scope.viewMemberUrl = function(member) {
-		return "/view/member/" + member.id;
+		return "/view/member/" + member._id;
 	};
 	$scope.addMemberUrl = function(group) {
-		return group ? "/add/member/group/" + group.id : "/add/member";
+		return group ? "/add/member/group/" + group._id : "/add/member";
 	};
 	$scope.mainViewUrl = function() {
 		return "/view";
@@ -159,10 +129,10 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 		return "/add/group";
 	};
 	$scope.editGroupUrl = function(group) {
-		return group ? "/edit/group/" + group.id : "";
+		return group ? "/edit/group/" + group._id : "";
 	};
 	$scope.viewGroupUrl = function(group) {
-		return group ? "/view/group/" + group.id : "";
+		return group ? "/view/group/" + group._id : "";
 	};
 	$scope.getGroups = function(member) {
 		var groups = [];
@@ -173,4 +143,71 @@ application.controller("tribeController", function($scope, $http, $location, $wi
 		});
 		return groups;
 	};
+	$scope.getGroupbyId = function(id) {
+		console.log("getGroupbyId", id, $scope.groups);
+		console.log($scope);
+		console.log($scope.groups);
+		return Tribe.detect($scope.groups, function(group, groupIndex) {
+			return group.id == id;
+		});
+	};
+	$scope.hasGroupById = function(id) {
+		console.log("hasGroupById", id, $scope.groups);
+		console.log($scope.selectedGroup);
+		return id != undefined
+			&& id != null
+			&& !!("" + id).replace(/\s+/g, "")
+			&& !!$scope.selectedGroup;
+	};
+	$scope.getMembersByGroup = function(id) {
+		if (id === undefined || id === null) {
+			return $scope.members;
+		} else {
+			return Tribe.select($scope.members, function(member, memberIndex) {
+				return Tribe.anySatisfy(member.groups, function(group, groupIndex) {
+					return group == id;
+				});
+			});
+		}
+	};
+	$scope.resetSelectGroupFromRequest = function() {
+		$scope.selectedGroup = null;
+		$scope.selectedGroupMembers = $scope.members;
+	};
+	$scope.selectGroupFromRequest = function() {
+		var selectedGroup = $scope.getGroupById($routeParams.id);
+		if ($routeParams.id != undefined && $routeParams.id != null && !selectedGroup) {
+			$location.url($scope.mainViewUrl());
+		} else {
+			if (selectedGroup != $scope.selectedGroup) {
+				$scope.selectedGroup = selectedGroup
+				$scope.selectedGroupMembers = $scope.selectedGroup ? $scope.getMembersByGroup($routeParams.id) : $scope.members;
+			}
+		}
+	};
+	$scope.groups = [];
+	$scope.members = [];
+	$scope.error = null;
+	$scope.selectedGroup = null;
+	$scope.selectedGroupMembers = $scope.members;
+	if (!$scope.groups || $scope.groups.length < 1) {
+		$http.get("/api/groups")
+			.success(function(response) {
+				$scope.groups = response.results;
+				if (!$scope.members || $scope.members.length < 1) {
+					$http.get("/api/members/details")
+						.success(function(response) {
+							$scope.members = response.results;
+							$scope.resetSelectGroupFromRequest();
+							$scope.selectGroupFromRequest();
+						})
+						.error(function(error) {
+							$scope.error = error;
+						});
+				}
+			})
+			.error(function(error) {
+				$scope.error = error;
+			});
+	}
 });
