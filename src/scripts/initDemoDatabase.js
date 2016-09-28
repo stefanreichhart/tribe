@@ -32,52 +32,61 @@ fs.readdir(dataPath, function(err, files) {
 					mongoClient.connect(url, function(err, db) {
 						if (err) {
 							log.error("Connecting to Mongo-DB", { url: url, error: err });
+							db.close();
 						} else {
 							var groups = db.collection('groups');
-							var groupMapping = {};
-							groups.insertMany(json.groups, function(err, result) {
-								if (err) { 
-									log.error("Adding groups", { groups: json.groups, error: err });
-								} else {
-									log.info("Adding groups successful");
-									for (var g=0; g<result.ops.length; g++) {
-										var group = result.ops[g];
-										groupMapping[group.id] = group._id;
-									}
-									var members = db.collection('members');
-									members.insertMany(json.members, function(err, result) {
-										if (err) {
-											log.error("Adding members", { members: json.members, error: err });
-										} else {
-											log.info("Adding members successful");
-											for (var i=0; i<result.ops.length; i++) {
-												var member = result.ops[i];
-												var newgroups = [];
-												for (var g=0; g<member.groups.length; g++) {
-													var groupId = member.groups[g];
-													newgroups.push(groupMapping[groupId]);
-												}
-												members.update({ "_id": objectId(member._id) }, { "$set": { "groups": newgroups }}, function(err, r) {
-													if (err) {
-														log.error("Updating member", { member: member, groups: newgroups, error: err });
-													} else {
-														if (i >= result.ops.length - 1) {
-															fs.writeFile(dotJsonPath, "", function(err) {
-																if(err) {
-																	log.error("Importing demo database", { file: dotJsonPath, error: err });
-																} else {
-																	log.info("Importing Demo database successful", { path: dataPath, file: jsonPath, dotFile: dotJsonPath }); 
-																}
-															});
-															db.close();
-														}
+							var members = db.collection('members');
+							if (groups.find({}).toArray().llength === 0 && members.find({}).toArray().llength === 0) {
+								var groupMapping = {};
+								groups.insertMany(json.groups, function(err, result) {
+									if (err) { 
+										log.error("Adding groups", { groups: json.groups, error: err });
+										db.close();
+									} else {
+										log.info("Adding groups successful");
+										for (var g=0; g<result.ops.length; g++) {
+											var group = result.ops[g];
+											groupMapping[group.id] = group._id;
+										}
+										
+										members.insertMany(json.members, function(err, result) {
+											if (err) {
+												log.error("Adding members", { members: json.members, error: err });
+												db.close();
+											} else {
+												log.info("Adding members successful");
+												for (var i=0; i<result.ops.length; i++) {
+													var member = result.ops[i];
+													var newgroups = [];
+													for (var g=0; g<member.groups.length; g++) {
+														var groupId = member.groups[g];
+														newgroups.push(groupMapping[groupId]);
 													}
-												});
-											}
-										} 
-									});
-								}
-							});
+													members.update({ "_id": objectId(member._id) }, { "$set": { "groups": newgroups }}, function(err, r) {
+														if (err) {
+															log.error("Updating member", { member: member, groups: newgroups, error: err });
+														} else {
+															if (i >= result.ops.length - 1) {
+																fs.writeFile(dotJsonPath, "", function(err) {
+																	if(err) {
+																		log.error("Importing demo database", { file: dotJsonPath, error: err });
+																	} else {
+																		log.info("Importing Demo database successful", { path: dataPath, file: jsonPath, dotFile: dotJsonPath }); 
+																	}
+																});
+																db.close();
+															}
+														}
+													});
+												}
+											} 
+										});
+									}
+								});
+							} else {
+								log.warn("Database is not empty");
+								db.close();
+							}
 						} 
 					});
 				} 

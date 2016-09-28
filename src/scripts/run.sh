@@ -44,41 +44,7 @@ if [ -z "$VERSION_DB" ]; then
 	exit 1
 fi
 
-echo "Checking database instance ..."
-COUNT_PROCESS=`ps -Aef | grep mongod | grep dbpath | grep -c "$ROOT_DIR/data"`
-if [ $COUNT_PROCESS -gt 0 ]; then
-	echo "This database instance is already running ... "
-	echo "Processes: $COUNT_PROCESS"
-else
-	echo "Starting up database ... "
-	mongod --dbpath="$ROOT_DIR/data" --logRotate="rename"  --logpath="$ROOT_DIR/log" &
-	COUNT_PROCESS=0
-	while [ $COUNT_PROCESS -eq 0 ]
-	do
-		echo "Waiting on database instance to start ..."
-		sleep 1
-		COUNT_PROCESS=`ps -Aef | grep mongod | grep dbpath | grep -c "$ROOT_DIR/data"`
-	done
-fi
-
-echo "Checking web-server ..."
-COUNT_PROCESS=`ps -Aef | grep node | grep -c server.js`
-if [ $COUNT_PROCESS -gt 0 ]; then
-	echo "This web-server is already running ... "
-	echo "Processes: $COUNT_PROCESS"
-else
-	echo "Starting up web-server ... "
-	npm start &
-	COUNT_PROCESS=0
-	while [ $COUNT_PROCESS -eq 0 ]
-	do
-		echo "Waiting on web-server to start ..."
-		sleep 1
-		COUNT_PROCESS=`ps -Aef | grep node | grep -c server.js`
-	done
-fi
-
-echo "Database instance and web-server are ready"
-echo " ---> http://localhost:8888"
+./scripts/startDatabase.sh
+./scripts/startServer.sh
 
 cd "$ORIGINAL_DIR"

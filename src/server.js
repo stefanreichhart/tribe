@@ -1,24 +1,34 @@
-// require
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+// imports
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+
 var path = require('path');
 var randomString = require("randomstring");
 var log = require('winston');
 var express = require('express');
 var fileUpload = require('express-fileupload');
 var mongodb = require('mongodb');
-var mongoClient = mongodb.MongoClient;
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+// config -> TODO: push to "config.json"
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 var app = express();
-var www = __dirname + "/www"; // only serve files from this directory !
+var www = __dirname + "/www";
 var url = 'mongodb://localhost:27017/tribe';
-var router = express.Router();
 
-// linking
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+// statics
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+
 app.use(express.static(www));
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+// uploaders
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+
 app.use(fileUpload());
-app.use('/api', router);
 
-
-// image uploader for member poster
 app.post('/upload/member', function(req, res) {
 	if (!req.files) {
 		log.warn("Invalid request - No files");
@@ -71,48 +81,104 @@ app.post('/upload/member', function(req, res) {
 	});
 });
 
-var connect = function(fnSuccess, fnError) {
-	mongoClient.connect(url, function(err, db) {
-		if (!err) {
-			fnSuccess(db);
-		} else {
-			console.log(err);
-			log.error("DB Error", { connection: err });
-			fnError(err, db);
-		}		
-	});
-};
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+// api
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+
+var router = express.Router();
+var mongoClient = mongodb.MongoClient;
+
+app.use('/api', router);
 
 router.get('/members', function(req, res) {
-	connect(
-		function(db) {
+	// TODO: authentication
+	mongoClient.connect(url, function(err, db) {
+		if (err) {
+			res.status(500).json({ results: [], error: err }); 
+			db.close();
+		} else {
+			db.collection('members').find({}).toArray(function(err, docs) { 
+				var results = [];
+				for (i=0; i<docs.length; i++) {
+					var result = docs[i];
+					results.push({
+						_id: result._id,
+						id: result.id,
+						poster: result.poster,
+						firstname: result.firstname,
+						lastname: result.lastname,
+						groups: groups
+					});
+				}
+				res.json({ results: results, error: err }); 
+				db.close();
+			});
+		}
+	});
+});
+
+router.get('/member/:id', function(req, res) {
+	// TODO: authentication
+	mongoClient.connect(url, function(err, db) {
+		if (err) {
+			res.status(500).json({ results: null, error: err }); 
+			db.close();
+		} else {
+			db.collection('members').findOne({ _id: req.params.id }, function(err, doc) { 
+				res.json({ results: doc, error: err }); 
+				db.close();
+			});
+		}
+	});
+});
+
+router.get('/members/details', function(req, res) {
+	// TODO: authentication
+	mongoClient.connect(url, function(err, db) {
+		if (err) {
+			res.status(500).json({ results: [], error: err }); 
+			db.close();
+		} else {
 			db.collection('members').find({}).toArray(function(err, docs) { 
 				res.json({ results: docs, error: err }); 
 				db.close();
 			});
-			
-		},
-		function(err, db) { 
-			res.json({ results: [], error: err }); 
-			db.close();
 		}
-	);
+	});
 });
 
 router.get('/groups', function(req, res) {
-	connect(
-		function(db) {
+	// TODO: authentication
+	mongoClient.connect(url, function(err, db) {
+		if (err) {
+			res.json({ results: [], error: err }); 
+			db.close();
+		} else {
 			db.collection('groups').find({}).toArray(function(err, docs) { 
 				res.json({ results: docs, error: err }); 
 				db.close();
 			});
-		},
-		function(err, db) { 
-			res.json({ results: [], error: err }); 
-			db.close();
 		}
-	);
+	});
 });
 
+router.get('/group/:id', function(req, res) {
+	// TODO: authentication
+	mongoClient.connect(url, function(err, db) {
+		if (err) {
+			res.status(500).json({ results: null, error: err }); 
+			db.close();
+		} else {
+			db.collection('groups').findOne({ _id: req.params.id }, function(err, doc) { 
+				res.json({ results: doc, error: err }); 
+				db.close();
+			});
+		}
+	});
+});
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
+// start
+// // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 app.listen(8888);
